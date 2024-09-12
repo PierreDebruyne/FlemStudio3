@@ -1,0 +1,74 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 x:Class="FlemStudio.LayoutManagement.Avalonia.Layouts.ColumnLayoutItemView"
+			 xmlns:vm="clr-namespace:FlemStudio.LayoutManagement.Avalonia.Layouts"
+			 xmlns:menu="clr-namespace:FlemStudio.LayoutManagement.Avalonia"
+			 >
+	<Design.DataContext>
+		<!-- This only sets the DataContext for the previewer in an IDE,
+		 to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+		<vm:ColumnLayoutItemViewModel/>
+	</Design.DataContext>
+
+
+	<UserControl.Resources>
+		<MenuFlyout x:Key="AddTopMenuFlyout" ItemsSource="{Binding AddTopMenuViewModel.Items}">
+			<MenuFlyout.ItemContainerTheme>
+				<ControlTheme TargetType="MenuItem" BasedOn="{StaticResource {x:Type MenuItem}}" x:DataType="menu:MenuItemViewModel">
+					<Setter Property="Header" Value="{Binding Header}"/>
+					<Setter Property="ItemsSource" Value="{Binding Items}"/>
+					<Setter Property="Command" Value="{Binding Command}"/>
+				</ControlTheme>
+			</MenuFlyout.ItemContainerTheme>
+		</MenuFlyout>
+		
+		<MenuFlyout x:Key="AddBottomMenuFlyout" ItemsSource="{Binding AddBottomMenuViewModel.Items}">
+			<MenuFlyout.ItemContainerTheme>
+				<ControlTheme TargetType="MenuItem" BasedOn="{StaticResource {x:Type MenuItem}}" x:DataType="menu:MenuItemViewModel">
+					<Setter Property="Header" Value="{Binding Header}"/>
+					<Setter Property="ItemsSource" Value="{Binding Items}"/>
+					<Setter Property="Command" Value="{Binding Command}"/>
+				</ControlTheme>
+			</MenuFlyout.ItemContainerTheme>
+		</MenuFlyout>
+		
+		<MenuFlyout x:Key="SplitLeftMenuFlyout" ItemsSource="{Binding SplitLeftMenuViewModel.Items}">
+			<MenuFlyout.ItemContainerTheme>
+				<ControlTheme TargetType="MenuItem" BasedOn="{StaticResource {x:Type MenuItem}}" x:DataType="menu:MenuItemViewModel">
+					<Setter Property="Header" Value="{Binding Header}"/>
+					<Setter Property="ItemsSource" Value="{Binding Items}"/>
+					<Setter Property="Command" Value="{Binding Command}"/>
+				</ControlTheme>
+			</MenuFlyout.ItemContainerTheme>
+		</MenuFlyout>
+		
+		<MenuFlyout x:Key="SplitRightMenuFlyout" ItemsSource="{Binding SplitRightMenuViewModel.Items}">
+			<MenuFlyout.ItemContainerTheme>
+				<ControlTheme TargetType="MenuItem" BasedOn="{StaticResource {x:Type MenuItem}}" x:DataType="menu:MenuItemViewModel">
+					<Setter Property="Header" Value="{Binding Header}"/>
+					<Setter Property="ItemsSource" Value="{Binding Items}"/>
+					<Setter Property="Command" Value="{Binding Command}"/>
+				</ControlTheme>
+			</MenuFlyout.ItemContainerTheme>
+		</MenuFlyout>
+	</UserControl.Resources>
+
+	<Grid ColumnDefinitions="auto, *">
+		<ContentControl Grid.Column="1" Content="{Binding LayoutViewModel}"></ContentControl>
+
+		<StackPanel Grid.Column="0" IsVisible="{Binding EditMode}" VerticalAlignment="Center">
+			<!--
+			<Button Command="{Binding AddTopCommand}">Add Top</Button>
+			-->
+			<Button Flyout="{StaticResource AddTopMenuFlyout}">Add Top</Button>
+			<Button Command="{Binding RemoveItemCommand}">RemoveItem</Button>
+			<Button IsVisible="{Binding CanSplit}" Flyout="{StaticResource SplitLeftMenuFlyout}">Slit Left</Button>
+			<Button IsVisible="{Binding CanSplit}" Flyout="{StaticResource SplitRightMenuFlyout}">Slit Right</Button>
+			<Button Flyout="{StaticResource AddBottomMenuFlyout}">Add Bottom</Button>
+		</StackPanel>
+	</Grid>
+
+</UserControl>

@@ -1,0 +1,24 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 x:Class="FlemStudio.LayoutManagement.Avalonia.LayoutMenuView"
+			 xmlns:vm="clr-namespace:FlemStudio.LayoutManagement.Avalonia"
+			 
+			 >
+
+	<Menu>
+		<MenuItem Header="_Layout" ItemsSource="{Binding Items}">
+			<MenuItem.ItemContainerTheme>
+				<ControlTheme TargetType="MenuItem" BasedOn="{StaticResource {x:Type MenuItem}}" x:DataType="vm:LayoutMenuItemViewModel">
+					<Setter Property="Header" Value="{Binding Header}"/>
+					<Setter Property="Command" Value="{Binding Command}"></Setter>
+				</ControlTheme>
+			</MenuItem.ItemContainerTheme>
+		</MenuItem>
+	</Menu>
+
+
+
+</UserControl>

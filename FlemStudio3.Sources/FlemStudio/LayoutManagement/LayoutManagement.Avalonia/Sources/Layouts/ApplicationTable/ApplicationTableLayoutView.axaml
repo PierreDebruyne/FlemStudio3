@@ -1,0 +1,135 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 x:Class="FlemStudio.LayoutManagement.Avalonia.Layouts.ApplicationTableLayoutView"
+			 xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+			 xmlns:apps="clr-namespace:FlemStudio.LayoutManagement.Avalonia.Applications"
+			 xmlns:vm="clr-namespace:FlemStudio.LayoutManagement.Avalonia.Layouts"
+			 xmlns:views="clr-namespace:FlemStudio.LayoutManagement.Avalonia.Layouts"
+			 >
+	<Design.DataContext>
+		<!-- This only sets the DataContext for the previewer in an IDE,
+		 to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+		<vm:TabLayoutViewModel/>
+	</Design.DataContext>
+	
+	
+	<UserControl.Resources>
+		<MenuFlyout x:Key="SharedMenuFlyout">
+			<MenuItem Header="Add application">
+				<MenuItem Header="In a new tab" InputGesture="Ctrl+T" Command="{Binding OnAddTabCommand}"/>
+				<MenuItem Header="Split">
+					<MenuItem Header="Top" Command="{Binding OnSplitTop}"/>
+					<MenuItem Header="Bottom" Command="{Binding OnSplitBottom}" />
+					<MenuItem Header="Left" Command="{Binding OnSplitLeft}" />
+					<MenuItem Header="Right" Command="{Binding OnSplitRight}" />
+				</MenuItem>
+				<MenuItem Header="Next to">
+					<MenuItem Header="Top" Command="{Binding OnAddTop}" />
+					<MenuItem Header="Bottom" Command="{Binding OnAddBottom}"/>
+					<MenuItem Header="Left" Command="{Binding OnAddLeft}"/>
+					<MenuItem Header="Right" Command="{Binding OnAddRight}"/>
+				</MenuItem>
+
+				
+			</MenuItem>
+			<MenuItem Header="Make floating" InputGesture="Ctrl+A" Command="{Binding OnMakeFloating}"/>
+			
+			<MenuItem Header="Close" InputGesture="Ctrl+ESCAPE" Command="{Binding OnClose}">
+				<MenuItem.Icon>
+					<materialIcons:MaterialIcon Kind="Remove" />
+				</MenuItem.Icon>
+			</MenuItem>
+			<MenuItem IsVisible="{Binding IsTableVisible}" Header="Close all tabs" InputGesture="Ctrl+ALT+ESCAPE" Command="{Binding OnCloseAllTabs}">
+				<MenuItem.Icon>
+					<materialIcons:MaterialIcon Kind="Remove" />
+				</MenuItem.Icon>
+			</MenuItem>
+		</MenuFlyout>
+
+
+		<MenuFlyout x:Key="ApplicationMenuFlyout" ItemsSource="{Binding AddApplicationMenu.Items}">
+			<MenuFlyout.ItemContainerTheme>
+				<ControlTheme TargetType="MenuItem" BasedOn="{StaticResource {x:Type MenuItem}}" x:DataType="apps:ApplicationMenuItemViewModel">
+					<Setter Property="Header" Value="{Binding Header}"/>
+					<Setter Property="Command" Value="{Binding Command}"/>
+				</ControlTheme>
+			</MenuFlyout.ItemContainerTheme>
+		</MenuFlyout>
+
+		<MenuFlyout x:Key="TabMenuFlyout">
+			<MenuItem Header="Add application" ItemsSource="{Binding AddApplicationMenu.Items}">
+				<MenuItem.ItemContainerTheme>
+					<ControlTheme TargetType="MenuItem" BasedOn="{StaticResource {x:Type MenuItem}}" x:DataType="apps:ApplicationMenuItemViewModel">
+						<Setter Property="Header" Value="{Binding Header}"/>
+						<Setter Property="Command" Value="{Binding Command}"></Setter>
+					</ControlTheme>
+				</MenuItem.ItemContainerTheme>
+			</MenuItem>
+			<MenuItem Header="Make floating" InputGesture="Ctrl+A" Command="{Binding OnMakeFloating}"/>
+			<MenuItem Header="Close" InputGesture="Ctrl+ESCAPE" Command="{Binding OnClose}">
+				<MenuItem.Icon>
+					<materialIcons:MaterialIcon Kind="Remove" />
+				</MenuItem.Icon>
+			</MenuItem>
+			<MenuItem IsVisible="{Binding IsTableVisible}" Header="Close all tabs" InputGesture="Ctrl+ALT+ESCAPE" Command="{Binding OnCloseAllTabs}">
+				<MenuItem.Icon>
+					<materialIcons:MaterialIcon Kind="Remove" />
+				</MenuItem.Icon>
+			</MenuItem>
+		</MenuFlyout>
+		
+	</UserControl.Resources>
+		
+
+	
+	
+	
+	<Grid RowDefinitions="*, auto" Name="AppContainer" Background="Transparent">
+		<Border Grid.Row="0" BorderBrush="{DynamicResource ThemeBorderLowBrush}" BorderThickness="1, 1, 1, 0"   >
+			<Grid RowDefinitions="auto, *">
+				<StackPanel IsVisible="{Binding IsFocus}"  Background="{DynamicResource ThemeFocusBrush}" Grid.Row="0" Height="2" VerticalAlignment="Top"></StackPanel>
+				<StackPanel Grid.Row="0" ContextFlyout="{StaticResource TabMenuFlyout}" Background="Transparent">
+
+					<Grid ColumnDefinitions="auto, auto, *, auto" Margin="6">
+
+
+						<TextBlock Grid.Column="0" VerticalAlignment="Center" Text="{Binding ActiveTab.Header}"></TextBlock>
+						<Button Grid.Column="1" Height="16" Width="16" Margin="4 0" Cursor="Hand" Background="Transparent" BorderBrush="Transparent" Flyout="{StaticResource ApplicationMenuFlyout}">
+							<materialIcons:MaterialIcon Kind="ChevronDown"/>
+						</Button>
+						<StackPanel Grid.Column="3" Orientation="Horizontal" Spacing="5">
+							<Button Height="16" Width="16" Content="{materialIcons:MaterialIconExt Kind=GearOutline, Size=12}" Cursor="Hand" Flyout="{StaticResource TabMenuFlyout}"></Button>
+							<Button Height="16" Width="16" Content="{materialIcons:MaterialIconExt Kind=Remove}" Cursor="Hand" Command="{Binding OnCloseCommand}"></Button>
+						</StackPanel>
+					</Grid>
+				</StackPanel>
+				<!--
+				<ContentControl  Content="{Binding Content}" Margin="0" Padding="0"></ContentControl>
+				-->
+				
+				<ContentControl Grid.Row="1" Margin="0" Padding="0" Content="{Binding ActiveTab.ApplicationViewModel}"></ContentControl>
+				
+			</Grid>
+		</Border>
+		
+		<Grid RowDefinitions="*" Grid.Row="1">
+			<Border Grid.Row="0" BorderBrush="{DynamicResource ThemeBorderLowBrush}" BorderThickness="0,1,0,0"/>
+			<ItemsControl Grid.Row="0" ItemsSource="{Binding Tabs}" IsVisible="{Binding IsTableVisible}">
+				<ItemsControl.ItemsPanel>
+					<ItemsPanelTemplate>
+						<StackPanel Orientation="Horizontal"></StackPanel>
+					</ItemsPanelTemplate>
+				</ItemsControl.ItemsPanel>
+				<ItemsControl.ItemTemplate>
+					<DataTemplate>
+						<views:ApplicationTableLayoutItemView DataContext="{Binding}"></views:ApplicationTableLayoutItemView>
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			</ItemsControl>
+		</Grid>
+	</Grid>
+	
+</UserControl>

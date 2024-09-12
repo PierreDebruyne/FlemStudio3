@@ -1,0 +1,30 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 x:Class="FlemStudio.LayoutManagement.Avalonia.Applications.EmptyApplicationView"
+			 xmlns:vm="clr-namespace:FlemStudio.LayoutManagement.Avalonia.Applications"
+			 xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+			 >
+	<Design.DataContext>
+		<!-- This only sets the DataContext for the previewer in an IDE,
+		 to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+		<vm:EmptyApplicationViewModel/>
+	</Design.DataContext>
+
+	<UserControl.Resources>
+		<MenuFlyout x:Key="ApplicationMenuFlyout">
+			<MenuItem Header="AssetFileExplorer"></MenuItem>
+			<MenuItem Header="AssetFileHierarchy"></MenuItem>
+			<MenuItem Header="AssetFileDebugger"></MenuItem>
+		</MenuFlyout>
+
+	</UserControl.Resources>
+
+	<StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+		<Button Content="{materialIcons:MaterialIconExt Kind=Add, Size=12}" Cursor="Hand" Flyout="{StaticResource ApplicationMenuFlyout}"></Button>
+
+	</StackPanel>
+
+</UserControl>

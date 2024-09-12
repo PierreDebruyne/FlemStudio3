@@ -1,0 +1,36 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 x:Class="FlemStudio.AssetExplorerApplication.Avalonia.AssetExplorerApplicationView"
+			 xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+			 xmlns:views="clr-namespace:FlemStudio.AssetExplorerApplication.Avalonia"
+			 
+			 >
+	<Grid RowDefinitions="auto, *, auto">
+		<StackPanel Grid.Row="0" Orientation="Horizontal" Spacing="5" Margin="5 4">
+
+
+
+			<Button Height="32" Width="32" Content="{materialIcons:MaterialIconExt Kind=FolderFile}" Cursor="Hand" Command="{Binding OpenInExplorer}"></Button>
+			<Button Height="32" Width="32" IsEnabled="{Binding CanGoToParentFolder}" Command="{Binding GoToParentFolder}" Cursor="Hand">..</Button>
+			
+			<views:AssetBreadCrumbView DataContext="{Binding AssetBreadCrumbViewModel}" MinWidth="250"/>
+			<Button Height="32" Width="32" Content="{materialIcons:MaterialIconExt Kind=Reload}" Cursor="Hand" Command="{Binding Refresh}"></Button>
+
+			<StackPanel Width="1" Background="{DynamicResource ThemeControlMidBrush}"></StackPanel>
+			<Button Height="32" Width="32" Content="{materialIcons:MaterialIconExt Kind=FilePlus}" Cursor="Hand" Command="{Binding AddAsset}"></Button>
+			<Button Height="32" Width="32" Content="{materialIcons:MaterialIconExt Kind=FolderAdd}" Cursor="Hand" Command="{Binding AddDirectory}"></Button>
+			<Button Height="32" Width="32" Content="{materialIcons:MaterialIconExt Kind=Rename}" Cursor="Hand"></Button>
+			<Button Height="32" Width="32" Content="{materialIcons:MaterialIconExt Kind=TrashCan}" Cursor="Hand"></Button>
+
+
+
+		</StackPanel>
+		<views:AssetContainerContentView DataContext="{Binding AssetContainerContentViewModel}" Grid.Row="1" Margin="0 4"></views:AssetContainerContentView>
+
+		
+		<TextBlock Grid.Row="2" Text="{Binding CurrentAssetPath}"></TextBlock>
+	</Grid>
+</UserControl>

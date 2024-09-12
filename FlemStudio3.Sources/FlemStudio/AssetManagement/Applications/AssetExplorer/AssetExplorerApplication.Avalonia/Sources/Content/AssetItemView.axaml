@@ -1,0 +1,31 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 x:Class="FlemStudio.AssetExplorerApplication.Avalonia.AssetItemView">
+
+
+	<Grid>
+
+		<StackPanel Width="75" Margin="3" Background="Transparent" Cursor="Hand" Name="FileContainer">
+			<StackPanel.ContextMenu>
+				<ContextMenu>
+					<MenuItem Header="Open" IsEnabled="{Binding CanOpen}" Command="{Binding Open}"/>
+					<MenuItem Header="Copy GUID" Name="CopyGuidButton"/>
+					<MenuItem Header="Reload" IsEnabled="{Binding CanReload}" Command="{Binding Reload}"/>
+					<MenuItem Header="Build" IsEnabled="{Binding CanBuild}" Command="{Binding Build}"/>
+					<MenuItem Header="Rename"/>
+					<MenuItem Header="Delete" Command="{Binding Delete}"/>
+				</ContextMenu>
+			</StackPanel.ContextMenu>
+			<Image Source="/Assets/file_preview.png" Width="69" Height="69"></Image>
+			<TextBlock HorizontalAlignment="Center" FontSize="11" Text="{Binding Name}" TextWrapping="Wrap"></TextBlock>
+		</StackPanel>
+		<StackPanel>
+			<TextBlock IsVisible="{Binding NotRegistered}" HorizontalAlignment="Left" FontWeight="Bold" FontSize="16" Foreground="Red">?</TextBlock>
+			<TextBlock IsVisible="{Binding HasErrors}" HorizontalAlignment="Left" FontWeight="Bold" FontSize="16" Foreground="Red">X</TextBlock>
+		</StackPanel>
+	</Grid>
+
+</UserControl>

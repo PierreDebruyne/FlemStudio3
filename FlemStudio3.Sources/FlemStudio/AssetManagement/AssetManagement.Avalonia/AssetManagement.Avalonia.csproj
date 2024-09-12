@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+
+	<ItemGroup>
+		<PackageReference Include="Avalonia" Version="9999.0.0-localbuild" />
+		<PackageReference Include="Avalonia.Themes.Simple" Version="9999.0.0-localbuild" />
+		<PackageReference Include="Avalonia.Fonts.Inter" Version="9999.0.0-localbuild" />
+		<PackageReference Include="Avalonia.ReactiveUI" Version="9999.0.0-localbuild" />
+		<PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="9999.0.0-localbuild" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Material.Icons.Avalonia" Version="2.1.9" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="$(SolutionDir)/FlemStudio/Applications/Application.Avalonia/Application.Avalonia.csproj"></ProjectReference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="$(SolutionDir)/FlemStudio/AssetManagement/AssetManagement.Core/AssetManagement.Core.csproj"></ProjectReference>
+	</ItemGroup>
+
+</Project>

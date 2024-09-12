@@ -1,0 +1,47 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<LangVersion>latest</LangVersion>
+		<AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+	</PropertyGroup>
+
+
+	<ItemGroup>
+		<AvaloniaResource Include="Assets\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+
+		<!--
+		<PackageReference Include="Avalonia" Version="$(AvaloniaVersion)" />
+		<PackageReference Include="Avalonia.Themes.Fluent" Version="$(AvaloniaVersion)" />
+		<PackageReference Include="Avalonia.Fonts.Inter" Version="$(AvaloniaVersion)" />
+		<PackageReference Include="Avalonia.ReactiveUI" Version="$(AvaloniaVersion)" />
+		<PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="$(AvaloniaVersion)" />
+		-->
+
+		<PackageReference Include="Avalonia" Version="9999.0.0-localbuild" />
+		<PackageReference Include="Avalonia.Themes.Simple" Version="9999.0.0-localbuild" />
+		<PackageReference Include="Avalonia.Fonts.Inter" Version="9999.0.0-localbuild" />
+		<PackageReference Include="Avalonia.ReactiveUI" Version="9999.0.0-localbuild" />
+		<PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="9999.0.0-localbuild" />
+
+		
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Material.Icons.Avalonia" Version="2.1.9" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="$(SolutionDir)/FlemStudio/Applications/Application.Avalonia/Application.Avalonia.csproj"></ProjectReference>
+		<ProjectReference Include="$(SolutionDir)/FlemStudio/Projects/Project.UI/Project.UI.csproj"></ProjectReference>
+		<ProjectReference Include="$(SolutionDir)/FlemStudio/LayoutManagement/LayoutManagement.Avalonia/LayoutManagement.Avalonia.csproj"></ProjectReference>
+		<ProjectReference Include="$(SolutionDir)/FlemStudio/AssetManagement/AssetManagement.Avalonia/AssetManagement.Avalonia.csproj"></ProjectReference>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="$(SolutionDir)/FlemStudio/AssetManagement/Applications/AssetExplorer/AssetExplorerApplication.Avalonia/AssetExplorerApplication.Avalonia.csproj"></ProjectReference>
+	</ItemGroup>
+</Project>

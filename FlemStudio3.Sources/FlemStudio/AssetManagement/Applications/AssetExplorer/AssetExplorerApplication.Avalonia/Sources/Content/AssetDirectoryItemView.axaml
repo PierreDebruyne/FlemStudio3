@@ -1,0 +1,21 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 x:Class="FlemStudio.AssetExplorerApplication.Avalonia.AssetDirectoryItemView">
+
+
+	<StackPanel Width="75"  Margin="3" Background="Transparent" Cursor="Hand" Name="Container">
+		<StackPanel.ContextMenu>
+			<ContextMenu>
+				<MenuItem Header="Open"/>
+				<MenuItem Header="Rename"/>
+				<MenuItem Header="Delete"/>
+			</ContextMenu>
+		</StackPanel.ContextMenu>
+		<Image Source="/Assets/directory_preview.png" Width="69" Height="69"></Image>
+		<TextBlock HorizontalAlignment="Center" FontSize="11" Text="{Binding Name}" TextWrapping="Wrap"></TextBlock>
+	</StackPanel>
+
+</UserControl>

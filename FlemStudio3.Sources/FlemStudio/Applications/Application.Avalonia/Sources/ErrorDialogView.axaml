@@ -1,0 +1,34 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="150"
+			 x:Class="FlemStudio.Applications.Avalonia.ErrorDialogView"
+			 
+			 xmlns:vm="clr-namespace:FlemStudio.Applications.Avalonia.ViewModels"
+			 
+			 >
+	<Design.DataContext>
+		<!-- This only sets the DataContext for the previewer in an IDE,
+		 to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+		<vm:ErrorDialogViewModel/>
+	</Design.DataContext>
+
+	<Grid RowDefinitions="*, auto" Margin="10" ColumnDefinitions="*">
+		<StackPanel Grid.Row="0" Spacing="10">
+			<TextBlock FontWeight="Bold" Foreground="Red" Text="{Binding Message}"></TextBlock>
+			<Expander Margin="0" >
+				<Expander.Header>
+					<TextBlock >Details</TextBlock>
+				</Expander.Header>
+				<ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+					<TextBlock Text="{Binding Description}"></TextBlock>
+				</ScrollViewer>
+			</Expander>
+		</StackPanel>
+
+		<StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="10">
+			<Button Command="{Binding ClickOk}">OK</Button>
+		</StackPanel>
+	</Grid>
+</UserControl>

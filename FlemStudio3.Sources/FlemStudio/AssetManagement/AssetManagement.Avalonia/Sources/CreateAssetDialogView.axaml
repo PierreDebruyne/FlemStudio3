@@ -1,0 +1,84 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 x:Class="FlemStudio.AssetManagement.Avalonia.CreateAssetDialogView"
+			 
+			 >
+	<Grid RowDefinitions="*, 10, auto, 10, auto">
+
+		<Grid Grid.Row="0" ColumnDefinitions="*,2*,*" Background="{DynamicResource ThemeControlMidBrush}">
+			<StackPanel Grid.Column="0" >
+				<TextBlock>Filtres</TextBlock>
+			</StackPanel>
+			<StackPanel Grid.Column="1" Background="{DynamicResource ThemeBackgroundBrush}" Margin="4">
+				<ListBox ItemsSource="{Binding AssetTypes}" SelectedItem="{Binding SelectedAssetType}">
+					<ListBox.Styles>
+						<Style Selector="ListBox">
+							<Setter Property="BorderBrush" Value="Transparent"></Setter>
+							<Setter Property="Padding" Value="0"></Setter>
+							<Setter Property="Margin" Value="0"></Setter>
+
+						</Style>
+						<Style Selector="ListBoxItem">
+							<Setter Property="Margin" Value="0"></Setter>
+							<Setter Property="Padding" Value="0"></Setter>
+							<Setter Property="Height" Value="30"></Setter>
+						</Style>
+						<Style Selector="ListBoxItem Border">
+							<Setter Property="Margin" Value="0 "></Setter>
+							<Setter Property="Cursor" Value="Hand"></Setter>
+						</Style>
+
+						<Style Selector="ListBoxItem:pointerover /template/ ContentPresenter">
+							<Setter Property="Background" Value="Transparent"></Setter>
+
+						</Style>
+						<Style Selector="ListBoxItem:pointerover Border">
+							<Setter Property="Background" Value="{DynamicResource ThemeControlHighlightMidBrush}"></Setter>
+						</Style>
+
+
+
+						<Style Selector="ListBoxItem:selected /template/ ContentPresenter">
+							<Setter Property="Background" Value="Transparent"></Setter>
+						</Style>
+						<Style Selector="ListBoxItem:selected Border">
+							<Setter Property="BorderBrush" Value="{DynamicResource ThemeControlHighBrush}"></Setter>
+							<Setter Property="Background" Value="{DynamicResource ThemeControlHighlightMidBrush}"></Setter>
+						</Style>
+
+
+
+					</ListBox.Styles>
+
+					<ListBox.ItemTemplate>
+						<DataTemplate>
+							<Border BorderThickness="1" Padding="4">
+								<TextBlock Text="{Binding Name}" VerticalAlignment="Center"></TextBlock>
+							</Border>
+
+						</DataTemplate>
+					</ListBox.ItemTemplate>
+
+				</ListBox>
+
+			</StackPanel>
+			<StackPanel Grid.Column="2" Margin="6">
+				<TextBlock Margin="4 4">Description: </TextBlock>
+				<TextBlock Text="{Binding SelectedAssetType.Description}" TextWrapping="Wrap"></TextBlock>
+			</StackPanel>
+		</Grid>
+		<Grid Grid.Row="2" ColumnDefinitions="auto, 10, *"  Margin="10 0">
+			<TextBlock Grid.Column="0" VerticalAlignment="Center">Name:</TextBlock>
+			<TextBox Grid.Column="2" Text="{Binding Name}"></TextBox>
+			
+		</Grid>
+
+		<StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="10"  Margin="10">
+			<Button Command="{Binding Submit}">Create Asset</Button>
+			<Button Command="{Binding Cancel}">Cancel</Button>
+		</StackPanel>
+	</Grid>
+</UserControl>

@@ -1,0 +1,39 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:vm="clr-namespace:FlemStudio.Project.Avalonia.Sources"
+			 xmlns:layoutMng="clr-namespace:FlemStudio.LayoutManagement.Avalonia;assembly=LayoutManagement.Avalonia"
+			 xmlns:layout="clr-namespace:FlemStudio.LayoutManagement.Avalonia.Layouts;assembly=LayoutManagement.Avalonia"
+			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 x:Class="FlemStudio.Project.Avalonia.Sources.MainView"
+			 x:DataType="vm:MainViewModel">
+	<Design.DataContext>
+		<!-- This only sets the DataContext for the previewer in an IDE,
+		 to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+		<vm:MainViewModel />
+	</Design.DataContext>
+
+	<DockPanel Margin="3">
+		<StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+			<Menu>
+				<MenuItem Header="_File">
+					<MenuItem Header="Start window" Command=""/>
+					<Separator/>
+					<MenuItem Header="_Exit"/>
+				</MenuItem>
+				<MenuItem Header="_Edit">
+					<MenuItem Header="Copy"/>
+					<MenuItem Header="Paste"/>
+				</MenuItem>
+
+			</Menu>
+			<layoutMng:LayoutMenuView DataContext="{Binding LayoutMenuViewModel}"></layoutMng:LayoutMenuView>
+		</StackPanel>
+
+
+
+		<layout:WindowLayoutView DataContext="{Binding WindowLayoutViewModel}"></layout:WindowLayoutView>
+		
+	</DockPanel>
+</UserControl>

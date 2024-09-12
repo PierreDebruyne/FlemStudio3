@@ -1,0 +1,43 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 x:Class="FlemStudio.AssetExplorerApplication.Avalonia.RootAssetDirectoryListView"
+			 xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
+			 
+			 >
+
+	<UserControl.Styles>
+		<Style Selector="FlyoutPresenter">
+			<Setter Property="Padding" Value="0" />
+			<Setter Property="BorderBrush" Value="Transparent"></Setter>
+			<Setter Property="BorderThickness" Value="0"></Setter>
+		</Style>
+	</UserControl.Styles>
+
+	<StackPanel Orientation="Horizontal">
+		<Button Content="{materialIcons:MaterialIconExt Kind=ChevronDown}" Cursor="Hand" Height="32" BorderThickness="1" BorderBrush="Transparent" >
+			<Button.Flyout>
+				<Flyout Placement="BottomEdgeAlignedLeft" >
+					<ListBox ItemsSource="{Binding Items}"  SelectedItem="{Binding SelectedItem}" Margin="0" Padding="0">
+						<ListBox.ItemTemplate>
+							<DataTemplate >
+								<TextBlock Margin="25 0 5 0" Padding="5" Text="{Binding Name}" FontWeight="Bold"/>
+							</DataTemplate>
+						</ListBox.ItemTemplate>
+						<ListBox.ItemsPanel>
+							<ItemsPanelTemplate>
+								<StackPanel Margin="0"/>
+							</ItemsPanelTemplate>
+						</ListBox.ItemsPanel>
+					</ListBox>
+				</Flyout>
+			</Button.Flyout>
+		</Button>
+		<Button Content="{Binding SelectedItem.Name}" Command="{Binding HandleClick}" BorderThickness="1" BorderBrush="Transparent" Cursor="Hand" FontWeight="Bold"></Button>
+	</StackPanel>
+
+
+
+</UserControl>

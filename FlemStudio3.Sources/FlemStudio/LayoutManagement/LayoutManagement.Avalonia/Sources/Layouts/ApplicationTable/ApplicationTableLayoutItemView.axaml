@@ -1,0 +1,40 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 x:Class="FlemStudio.LayoutManagement.Avalonia.Layouts.ApplicationTableLayoutItemView"
+			 
+			 xmlns:vm="clr-namespace:FlemStudio.LayoutManagement.Avalonia.Layouts"
+			 >
+	<Design.DataContext>
+		<!-- This only sets the DataContext for the previewer in an IDE,
+		 to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+		<vm:TabLayoutItemViewModel/>
+	</Design.DataContext>
+
+	<UserControl.Styles>
+		<Style Selector="Border.noactive">
+			<Setter Property="BorderBrush" Value="Transparent" />
+			<Setter Property="Background" Value="Transparent"></Setter>
+			<Setter Property="Cursor" Value="Hand"></Setter>
+		</Style>
+		<Style Selector="Border.active">
+			<Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderLowBrush}" />
+			<Setter Property="Background" Value="{DynamicResource ThemeBackgroundBrush}"/>
+		</Style>
+		<Style Selector="Border.noactive:pointerover">
+			<Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderLowBrush}" />
+			<Setter Property="Background" Value="{DynamicResource ThemeBorderLowBrush}"></Setter>
+		</Style>
+
+		<Style Selector="Border.active:pointerover">
+
+		</Style>
+
+
+	</UserControl.Styles>
+	<Border Classes.active="{Binding IsActive}" Classes.noactive="{Binding !IsActive}" BorderThickness="1,0,1,1" Name="TabItem">
+		<TextBlock Text="{Binding TabItem}" Margin="8,4" ></TextBlock>
+	</Border>
+</UserControl>

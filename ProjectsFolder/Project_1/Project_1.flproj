@@ -1,0 +1,6 @@
+name: Project_1
+version: 0.0.1
+extensions: [
+	Test,
+	Images
+]

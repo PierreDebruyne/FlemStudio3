@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="$(SolutionDir)/FlemStudio/Projects/Project.CLI/Project.CLI.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="$(SolutionDir)/Extensions/Test/TestExtension.Core/TestExtension.Core.csproj" />
+	</ItemGroup>
+
+</Project>

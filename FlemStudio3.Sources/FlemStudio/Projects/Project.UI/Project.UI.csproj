@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="$(SolutionDir)/FlemStudio/Projects/Project.Core/Project.Core.csproj" />
+		<ProjectReference Include="$(SolutionDir)/FlemStudio/LayoutManagement/LayoutManagement.Core/LayoutManagement.Core.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="$(SolutionDir)/FlemStudio/AssetManagement/Applications/AssetExplorer/AssetExplorerApplication.Core/AssetExplorerApplication.Core.csproj"></ProjectReference>
+	</ItemGroup>
+
+</Project>
