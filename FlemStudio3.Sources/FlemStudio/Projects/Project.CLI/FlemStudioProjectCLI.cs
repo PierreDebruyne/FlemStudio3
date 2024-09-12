@@ -1,5 +1,4 @@
 ﻿using FlemStudio.AssetManagement.CLI;
-using FlemStudio.Project.CLI.ExtensionManagement;
 using FlemStudio.Project.Core;
 using System.CommandLine;
 using System.CommandLine.Parsing;
@@ -16,12 +15,11 @@ namespace FlemStudio.Project.CLI
         protected bool Closing = false;
         protected Task? UpdateTask;
 
-        protected ProjectCLIExtensionManager CLIExtensionManager;
+        //protected ProjectCLIExtensionManager CLIExtensionManager;
 
         //protected RootCommand RootCommand;
 
         protected AssetTypeCommand AssetTypeCommand;
-        protected ExtensionCommand ExtensionCommand;
         protected AssetManagerCLI AssetManagerCLI;
 
         public FlemStudioProjectCLI(string installDirectory, FlemStudioProject project)
@@ -30,18 +28,14 @@ namespace FlemStudio.Project.CLI
             Project = project;
 
 
-            CLIExtensionManager = new ProjectCLIExtensionManager(this);
-            CLIExtensionManager.LoadExtensions(Project.ExtensionManager.EnumerateLoadedExtensions());
+            
 
 
             AssetTypeCommand = new AssetTypeCommand(Project.AssetManager);
-            ExtensionCommand = new ExtensionCommand(Project, CLIExtensionManager);
+            
             AssetManagerCLI = new AssetManagerCLI(Project.AssetManager);
 
-            foreach (AssetTypeCLI assetTypeCLI in CLIExtensionManager.EnumerateAssetTypeCLI())
-            {
-                AssetManagerCLI.RegisterAssetTypeCLI(assetTypeCLI);
-            }
+           
 
             UpdateTask = new Task(OnUpdate);
             UpdateTask.Start();
@@ -67,9 +61,6 @@ namespace FlemStudio.Project.CLI
                 case "AssetTypes":
                     AssetTypeCommand.Command.Invoke(args);
                     break;
-                case "Extensions":
-                    ExtensionCommand.Command.Invoke(args);
-                    break;
                 case "Asset":
                     AssetManagerCLI.AssetsCLI.Command.Invoke(args);
                     break;
@@ -88,8 +79,6 @@ namespace FlemStudio.Project.CLI
         {
             Console.WriteLine("=== AssetTypes ===");
             AssetTypeCommand.Command.Invoke("--help");
-            Console.WriteLine("=== Extensions ===");
-            ExtensionCommand.Command.Invoke("--help");
             Console.WriteLine("=== AssetDirectory ===");
             AssetManagerCLI.AssetDirectoryCLI.Command.Invoke("--help");
             Console.WriteLine("=== Asset ===");

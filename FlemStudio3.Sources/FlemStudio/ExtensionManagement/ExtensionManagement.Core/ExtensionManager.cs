@@ -39,7 +39,7 @@ namespace FlemStudio.ExtensionManagement.Core
             Deserializer = new DeserializerBuilder().WithNamingConvention(CamelCaseNamingConvention.Instance).Build();
         }
 
-        public ExtensionInfo GetExtensionInfo(string extensionName)
+        public IExtensionInfo GetExtensionInfo(string extensionName)
         {
             ExtensionRegistry.TryGetEntry(extensionName, out ExtensionRegistryEntry? entry);
             if (entry == null)
@@ -51,8 +51,19 @@ namespace FlemStudio.ExtensionManagement.Core
             ExtensionFile extensionFile = Deserializer.Deserialize<ExtensionFile>(reader);
             reader.Close();
 
-            ExtensionInfo extensionInfo = new ExtensionInfo(this, extensionFile.Guid, extensionFile.Name, extensionFile.Version, extensionFile.Dll_Path);
-            return extensionInfo;
+            return extensionFile;
+        }
+
+        public IEnumerable<IExtensionInfo> EnumerateExtensions()
+        {
+            foreach (ExtensionRegistryEntry entry in ExtensionRegistry.EnumerateEntries()) 
+            {
+                using (TextReader reader = File.OpenText(ExtensionFolderPath + "/" + entry.Path + "/" + "Extension.yaml"))
+                {
+                    ExtensionFile extensionFile = Deserializer.Deserialize<ExtensionFile>(reader);
+                    yield return extensionFile;
+                }
+            }
         }
 
         public void CreateExtension(string extensionName, string dllPath)

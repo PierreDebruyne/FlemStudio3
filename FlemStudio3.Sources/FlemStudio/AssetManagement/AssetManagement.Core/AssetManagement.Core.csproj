@@ -8,6 +8,11 @@
 
 	<ItemGroup>
 		<PackageReference Include="YamlDotNet" Version="15.1.2" />
+		<PackageReference Include="System.ComponentModel.Composition" Version="8.0.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="$(SolutionDir)/FlemStudio/ExtensionManagement/ExtensionManagement.Core/ExtensionManagement.Core.csproj" />
 	</ItemGroup>
 
 </Project>

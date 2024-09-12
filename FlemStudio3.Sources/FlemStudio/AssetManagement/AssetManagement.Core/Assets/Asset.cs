@@ -1,23 +1,5 @@
 ﻿namespace FlemStudio.AssetManagement.Core.Assets
 {
-    public class AssetConfig
-    {
-        public Guid Guid { get; }
-        public string Name { get; }
-        public AssetType AssetType { get; }
-        public string Version { get; }
-
-        public AssetConfig(Guid guid, string name, AssetType assetType, string version)
-        {
-            Guid = guid;
-            Name = name;
-            AssetType = assetType;
-            Version = version;
-        }
-    }
-
-
-
     public class Asset
     {
         

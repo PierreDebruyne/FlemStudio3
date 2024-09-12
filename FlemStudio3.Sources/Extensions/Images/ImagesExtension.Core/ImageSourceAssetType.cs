@@ -13,20 +13,29 @@ using SixLabors.ImageSharp.PixelFormats;
 
 namespace ImagesExtension.Core
 {
-
-    public class ImageSourceAssetType : AssetType
+    [AssetType(name: "ImageSource", guid: "00000000-0000-0000-0000-000000000002", version: "0.0.1")]
+    public class ImageSourceAssetType2 : IAssetType
     {
         public ISerializer Serializer { get; }
         public IDeserializer Deserializer { get; }
 
-        public override string Description => "This is an image source asset.";
-        public ImageSourceAssetType() : base(Guid.Parse("00000000-0000-0000-0000-000000000002"), "ImageSource", "0.0.1")
+        public string Alias => "Image source";
+        public string Description => "This is an image source asset.";
+        public ImageSourceAssetType2()
         {
             Serializer = new SerializerBuilder().WithNamingConvention(CamelCaseNamingConvention.Instance).Build();
             Deserializer = new DeserializerBuilder().WithNamingConvention(CamelCaseNamingConvention.Instance).Build();
         }
 
-        public override void OnCreateAsset(AssetInfo assetInfo)
+        public void Test()
+        {
+
+            Console.WriteLine("YO! I'am the image source asset type.");
+            Image<Rgba32> image = Image.Load<Rgba32>(Resources.grid);
+            image.Dispose();
+        }
+
+        public void OnCreateAsset(AssetInfo assetInfo)
         {
             ImageSourceAssetConfigFile configFile = new ImageSourceAssetConfigFile()
             {
@@ -44,7 +53,14 @@ namespace ImagesExtension.Core
             image.Dispose();
         }
 
-        public override void OnMoveAsset(AssetInfo assetInfo)
+        public void OnMoveAsset(AssetInfo assetInfo)
+        {
+
+        }
+
+
+
+        public void OnDeleteAsset(AssetInfo assetInfo)
         {
 
         }

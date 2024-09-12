@@ -4,6 +4,7 @@
 		<TargetFramework>net8.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
+		<CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
 	</PropertyGroup>
 
 	
@@ -24,12 +25,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="$(SolutionDir)/FlemStudio/Projects/Project.Core/Project.Core.csproj" />
+		<ProjectReference Include="$(SolutionDir)/FlemStudio/Projects/Project.Core/Project.Core.csproj"/>
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="SixLabors.ImageSharp" Version="3.1.5">
-			
-		</PackageReference>
+		<PackageReference Include="SixLabors.ImageSharp" Version="3.1.5"/>
 		
 	</ItemGroup>
 

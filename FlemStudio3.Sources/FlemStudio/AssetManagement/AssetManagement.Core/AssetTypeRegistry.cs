@@ -1,37 +1,122 @@
-﻿namespace FlemStudio.AssetManagement.Core
+﻿using FlemStudio.ExtensionManagement.Core;
+using System.ComponentModel.Composition;
+using System.ComponentModel.Composition.Hosting;
+using System.ComponentModel.Composition.Primitives;
+using System.Linq;
+using System.Reflection;
+
+namespace FlemStudio.AssetManagement.Core
 {
+    public class AssetTypeDefinition
+    {
+        public string Name { get; }
+
+        public Guid Guid { get; }
+
+        public string Version { get; }
+
+        public IAssetType AssetType { get; }
+
+        public AssetTypeDefinition(string name, Guid guid, string version, IAssetType assetType)
+        {
+            Name = name;
+            Guid = guid;
+            Version = version;
+            AssetType = assetType;
+        }
+    }
+
     public class AssetTypeRegistry
     {
-        protected Dictionary<Guid, AssetType> AssetTypesByGuid = new();
-        protected Dictionary<string, AssetType> AssetTypesByName = new();
+        [ImportMany(RequiredCreationPolicy = CreationPolicy.Shared)]
+        public Lazy<IAssetType, IAssetTypeIdentity>[] LoadedAssetTypes { get; set; }
 
-        public void RegisterAssetType(AssetType assetType)
+
+        protected Dictionary<Guid, AssetTypeDefinition> AssetTypesByGuid = new();
+        protected Dictionary<string, AssetTypeDefinition> AssetTypesByName = new();
+
+        public void LoadExtensions(ExtensionImporter extensionImporter, IList<Guid> assetTypeGuids)
         {
-            if (AssetTypesByGuid.ContainsKey(assetType.Guid))
+
+            
+
+            ComposablePartCatalog filteredCatalog = new FilteredCatalog(extensionImporter.Catalog, 
+                def => {
+                    
+                    try
+                    {
+                        if (def.ExportDefinitions.First().Metadata.ContainsKey("Guid")
+                                                && assetTypeGuids.Contains(Guid.Parse((string)def.ExportDefinitions.First().Metadata["Guid"])))
+                        {
+                            return true;
+                        }
+                    } catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                        Console.WriteLine(e.StackTrace);
+                    }
+
+                        return false;
+                    });
+            var container = new CompositionContainer(filteredCatalog);
+            container.ComposeParts(this);
+
+            foreach (var item in LoadedAssetTypes)
             {
-                throw new Exception("Asset manager already have an asset type with guid: " + assetType.Guid);
+                try
+                {
+                    RegisterAssetType(item.Metadata, item.Value);
+                } catch (Exception e)
+                {
+                    Console.WriteLine("Impossible to load asset type:");
+                    Console.WriteLine(e.Message);
+                    Console.WriteLine(e.StackTrace);
+                }
             }
-            if (AssetTypesByName.ContainsKey(assetType.Name))
-            {
-                throw new Exception("Asset manager already have an asset type with name: " + assetType.Name);
-            }
-            AssetTypesByGuid.Add(assetType.Guid, assetType);
-            AssetTypesByName.Add(assetType.Name, assetType);
         }
 
-        public bool TryGetAssetType(Guid guid, out AssetType? assetType)
+        public void TestExtensions()
+        {
+            foreach (var extension in LoadedAssetTypes)
+            {
+                Console.WriteLine("AssetType: '" + extension.Metadata.Guid + "', version: '" + extension.Metadata.Version + "'.");
+                Console.WriteLine("Name: '" + extension.Value.Alias + "', description: '" + extension.Value.Description + "'.");
+                extension.Value.Test();
+            }
+        }
+
+        public void RegisterAssetType(IAssetTypeIdentity identity, IAssetType assetType)
+        {
+            Guid guid = Guid.Parse(identity.Guid);
+            if (AssetTypesByGuid.ContainsKey(guid))
+            {
+                throw new Exception("Asset manager already have an asset type with guid: " + guid);
+            }
+            
+            if (AssetTypesByName.ContainsKey(identity.Name))
+            {
+                throw new Exception("Asset manager already have an asset type with name: " + identity.Name);
+            }
+            AssetTypeDefinition definition = new AssetTypeDefinition(identity.Name, guid, identity.Version, assetType);
+            AssetTypesByGuid.Add(guid, definition);
+            AssetTypesByName.Add(identity.Name, definition);
+        }
+
+        public bool TryGetAssetType(Guid guid, out AssetTypeDefinition? assetType)
         {
             return AssetTypesByGuid.TryGetValue(guid, out assetType);
         }
 
-        public bool TryGetAssetType(string name, out AssetType? assetType)
+        
+        public bool TryGetAssetType(string name, out AssetTypeDefinition? assetType)
         {
             return AssetTypesByName.TryGetValue(name, out assetType);
         }
+        
 
-        public IEnumerable<AssetType> EnumerateAssetTypes()
+        public IEnumerable<AssetTypeDefinition> EnumerateAssetTypes()
         {
-            foreach (AssetType assetType in AssetTypesByGuid.Values)
+            foreach (AssetTypeDefinition assetType in AssetTypesByGuid.Values)
             {
                 yield return assetType;
             }

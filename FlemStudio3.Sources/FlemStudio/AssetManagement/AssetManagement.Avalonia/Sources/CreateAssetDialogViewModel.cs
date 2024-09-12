@@ -30,7 +30,7 @@ namespace FlemStudio.AssetManagement.Avalonia
 
         protected AssetManager AssetManager;
 
-        public List<AssetType> AssetTypes { get; }
+        public List<AssetTypeDefinition> AssetTypes { get; }
 
         public CreateAssetDialogViewModel(AssetManager assetManager)
         {
@@ -42,8 +42,8 @@ namespace FlemStudio.AssetManagement.Avalonia
             }
         }
 
-        protected AssetType? _SelectedAssetType;
-        public AssetType? SelectedAssetType
+        protected AssetTypeDefinition? _SelectedAssetType;
+        public AssetTypeDefinition? SelectedAssetType
         {
             get => _SelectedAssetType;
             set

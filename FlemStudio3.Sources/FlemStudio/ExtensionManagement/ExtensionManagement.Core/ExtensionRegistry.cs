@@ -31,6 +31,14 @@ namespace FlemStudio.ExtensionManagement.Core
             EntriesByName.Add(entry.Name, entry);
         }
 
+        public IEnumerable<ExtensionRegistryEntry> EnumerateEntries()
+        {
+            foreach (ExtensionRegistryEntry entry in EntriesByGuid.Values)
+            {
+                yield return entry;
+            }
+        }
+
         public static ExtensionRegistry ReadFile(string path)
         {
             var deserializer = new DeserializerBuilder().WithNamingConvention(CamelCaseNamingConvention.Instance).Build();

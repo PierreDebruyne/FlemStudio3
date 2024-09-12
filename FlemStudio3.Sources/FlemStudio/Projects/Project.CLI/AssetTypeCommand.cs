@@ -18,7 +18,7 @@ namespace FlemStudio.Project.CLI
             Command listCommand = new Command("list", "List all available asset types.");
             listCommand.SetHandler(() =>
             {
-                foreach (AssetType assetType in AssetManager.EnumerateAssetTypes())
+                foreach (AssetTypeDefinition assetType in AssetManager.EnumerateAssetTypes())
                 {
                     Console.WriteLine(assetType.Name + " => version: '" + assetType.Version + "', guid: '" + assetType.Guid + "'");
                 }

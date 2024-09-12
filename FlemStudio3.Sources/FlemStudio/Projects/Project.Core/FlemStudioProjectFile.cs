@@ -12,7 +12,7 @@ namespace FlemStudio.Project.Core
 
         public List<string> Extensions { get; set; }
 
-
+        public List<Guid> AssetTypes { get; set; }
 
         public static FlemStudioProjectFile ReadFile(string path)
         {

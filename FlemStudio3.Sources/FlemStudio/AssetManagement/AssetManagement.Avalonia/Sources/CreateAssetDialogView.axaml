@@ -56,7 +56,7 @@
 					<ListBox.ItemTemplate>
 						<DataTemplate>
 							<Border BorderThickness="1" Padding="4">
-								<TextBlock Text="{Binding Name}" VerticalAlignment="Center"></TextBlock>
+								<TextBlock Text="{Binding AssetType.Alias}" VerticalAlignment="Center"></TextBlock>
 							</Border>
 
 						</DataTemplate>
@@ -67,7 +67,7 @@
 			</StackPanel>
 			<StackPanel Grid.Column="2" Margin="6">
 				<TextBlock Margin="4 4">Description: </TextBlock>
-				<TextBlock Text="{Binding SelectedAssetType.Description}" TextWrapping="Wrap"></TextBlock>
+				<TextBlock Text="{Binding SelectedAssetType.AssetType.Description}" TextWrapping="Wrap"></TextBlock>
 			</StackPanel>
 		</Grid>
 		<Grid Grid.Row="2" ColumnDefinitions="auto, 10, *"  Margin="10 0">
@@ -77,7 +77,7 @@
 		</Grid>
 
 		<StackPanel Grid.Row="4" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="10"  Margin="10">
-			<Button Command="{Binding Submit}">Create Asset</Button>
+			<Button Command="{Binding Submit}" IsEnabled="{Binding CanSubmit}">Create Asset</Button>
 			<Button Command="{Binding Cancel}">Cancel</Button>
 		</StackPanel>
 	</Grid>

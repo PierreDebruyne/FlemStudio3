@@ -8,7 +8,7 @@ namespace FlemStudio.AssetManagement.CLI
     public class AssetManagerCLI
     {
         protected AssetManager AssetManager;
-        public AssetTypeCLIRegistry AssetTypeRegistry { get; } = new();
+        
 
         public AssetsCLI AssetsCLI { get; }
         public AssetDirectoriesCLI AssetDirectoryCLI { get; }
@@ -21,18 +21,7 @@ namespace FlemStudio.AssetManagement.CLI
             AssetDirectoryCLI = new AssetDirectoriesCLI(assetManager);
         }
 
-        public void RegisterAssetTypeCLI(AssetTypeCLI assetTypeCLI)
-        {
-            AssetManager.TryGetAssetType(assetTypeCLI.Guid, out AssetType? assetType);
-            if (assetType == null)
-            {
-                throw new Exception("Asset type not found for asset type cli: " + assetTypeCLI.Name);
-            }
-            AssetTypeRegistry.RegisterAssetType(assetTypeCLI);
-            
-
-            assetTypeCLI.AssetTypeBase = assetType;
-        }
+       
 
 
     }

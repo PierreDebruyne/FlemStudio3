@@ -1,5 +1,5 @@
 ﻿using FlemStudio.AssetManagement.Core;
-using FlemStudio.Project.Core.ExtensionManagement;
+using FlemStudio.ExtensionManagement.Core;
 
 namespace FlemStudio.Project.Core
 {
@@ -11,7 +11,8 @@ namespace FlemStudio.Project.Core
 
         public FlemStudioProjectFile ProjectFile { get; }
         public string Name => ProjectFile.Name;
-        public ProjectExtensionManager ExtensionManager { get; }
+        public ExtensionImporter ExtensionImporter;
+        //public ProjectExtensionManager ExtensionManager { get; }
         public AssetManager AssetManager { get; }
 
         public FlemStudioProject(string installDirectory, string projectFilePath)
@@ -25,15 +26,20 @@ namespace FlemStudio.Project.Core
             }
             ProjectDirectoryPath = projectFileInfo.DirectoryName;
             ProjectFile = FlemStudioProjectFile.ReadFile(ProjectFilePath);
-            ExtensionManager = new ProjectExtensionManager(this);
-            ExtensionManager.LoadExtensions(ProjectFile.Extensions);
+            //ExtensionManager = new ProjectExtensionManager(this);
+            //ExtensionManager.LoadExtensions(ProjectFile.Extensions);
             //ExtensionManager.TestExtensions();
 
-            AssetManager = new AssetManager(ProjectDirectoryPath);
+            ExtensionImporter = new ExtensionImporter(installDirectory + "/" + "Extensions");
+
+            AssetManager = new AssetManager(ProjectDirectoryPath, ExtensionImporter, ProjectFile.AssetTypes);
+            
+            /*
             foreach (AssetType assetType in ExtensionManager.EnumerateAssetTypes())
             {
                 AssetManager.RegisterAssetType(assetType);
             }
+            */
 
 
 

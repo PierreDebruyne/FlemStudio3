@@ -1,8 +1,7 @@
 ﻿namespace FlemStudio.ExtensionManagement.Core
 {
-    public class ExtensionInfo
+    public interface IExtensionInfo
     {
-        protected ExtensionManager ExtensionManager;
         public Guid Guid { get; }
         public string Name { get; }
 
@@ -11,13 +10,8 @@
 
         public string Dll_Path { get; }
 
-        public ExtensionInfo(ExtensionManager extensionManager, Guid guid, string name, string version, string dll_Path)
-        {
-            ExtensionManager = extensionManager;
-            Guid = guid;
-            Name = name;
-            Version = version;
-            Dll_Path = dll_Path;
-        }
+        public string? Folder { get; }
+
+        
     }
 }
