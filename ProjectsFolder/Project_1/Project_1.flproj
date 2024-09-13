@@ -1,10 +1,6 @@
 name: Project_1
 version: 0.0.1
 extensions: [
-	Test,
-	Images
-]
-assetTypes: [
 	00000000-0000-0000-0000-000000000001,
 	00000000-0000-0000-0000-000000000002
 ]

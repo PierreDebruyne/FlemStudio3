@@ -30,9 +30,9 @@ namespace FlemStudio.Project.Core
             //ExtensionManager.LoadExtensions(ProjectFile.Extensions);
             //ExtensionManager.TestExtensions();
 
-            ExtensionImporter = new ExtensionImporter(installDirectory + "/" + "Extensions");
+            ExtensionImporter = new ExtensionImporter(installDirectory + "/" + "Extensions", ProjectFile.Extensions);
 
-            AssetManager = new AssetManager(ProjectDirectoryPath, ExtensionImporter, ProjectFile.AssetTypes);
+            AssetManager = new AssetManager(ProjectDirectoryPath, ExtensionImporter);
             
             /*
             foreach (AssetType assetType in ExtensionManager.EnumerateAssetTypes())

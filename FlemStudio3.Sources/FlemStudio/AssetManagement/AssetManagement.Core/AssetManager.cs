@@ -26,7 +26,7 @@ namespace FlemStudio.AssetManagement.Core
         public AssetRegistry AssetRegistry { get; }
         protected AssetRegistryUpdater AssetRegistryUpdater;
 
-        public AssetManager(string assetFolderPath, ExtensionImporter extensionImporter, IList<Guid> assetTypeGuids)
+        public AssetManager(string assetFolderPath, ExtensionImporter extensionImporter)
         {
             WorkingDirectory = FormatAssetPath(assetFolderPath);
 
@@ -35,7 +35,7 @@ namespace FlemStudio.AssetManagement.Core
 
             //AddAssetType(new AssetType(Guid.Parse("00000000-0000-0000-0000-000000000001"), "Test", "0.0.1"));
             //AddAssetType(new AssetType(Guid.Parse("00000000-0000-0000-0000-000000000002"), "Directory", "0.0.1"));
-            AssetTypeRegistry.LoadExtensions(extensionImporter, assetTypeGuids);
+            AssetTypeRegistry.LoadExtensions(extensionImporter);
             AssetTypeRegistry.TestExtensions();
 
             AssetRegistry = new AssetRegistry(this);
@@ -253,17 +253,25 @@ namespace FlemStudio.AssetManagement.Core
         }
         */
 
-        public AssetInfo CreateAsset(string assetTypeName, string rootDirectoryName, string? parentDirectoryPath, string name)
+        public AssetInfo CreateAsset(string assetTypeName, string rootDirectoryName, string? parentDirectoryPath, string name, Action<AssetInfo>? createAssetContent = null)
         {
-            if (parentDirectoryPath != null)
-            {
-                parentDirectoryPath = FormatAssetPath(parentDirectoryPath);
-            }
+            
 
             AssetTypeRegistry.TryGetAssetType(assetTypeName, out AssetTypeDefinition? assetType);
             if (assetType == null)
             {
                 throw new Exception("Asset type not found: " + assetTypeName);
+            }
+
+            return CreateAsset(assetType, rootDirectoryName, parentDirectoryPath, name, createAssetContent);
+
+        }
+
+        public AssetInfo CreateAsset(AssetTypeDefinition assetType, string rootDirectoryName, string? parentDirectoryPath, string name, Action<AssetInfo>? createAssetContent = null)
+        {
+            if (parentDirectoryPath != null)
+            {
+                parentDirectoryPath = FormatAssetPath(parentDirectoryPath);
             }
 
             if (AssetRegistry.TryGetRootAssetDirectory(rootDirectoryName, out RootAssetDirectory? rootDirectory) == false)
@@ -273,15 +281,14 @@ namespace FlemStudio.AssetManagement.Core
 
             if (parentDirectoryPath == null)
             {
-                return CreateAsset(assetType, rootDirectory.Info, name);
+                return CreateAsset(assetType, rootDirectory.Info, name, createAssetContent);
             }
 
             AssetDirectoryInfo directoryInfo = rootDirectory.Info.GetAssetDirectoryInfo(parentDirectoryPath);
-            return CreateAsset(assetType, directoryInfo, name);
-
+            return CreateAsset(assetType, directoryInfo, name, createAssetContent);
         }
 
-        public AssetInfo CreateAsset(AssetTypeDefinition assetType, IAssetContainerInfo containerInfo, string name)
+        public AssetInfo CreateAsset(AssetTypeDefinition assetType, IAssetContainerInfo containerInfo, string name, Action<AssetInfo>? createAssetContent = null)
         {
             if (containerInfo.Exist == false)
             {
@@ -311,7 +318,15 @@ namespace FlemStudio.AssetManagement.Core
             {
                 Serializer.Serialize(writer, definitionFile);
             }
-            assetType.AssetType.OnCreateAsset(assetInfo);
+
+            if (createAssetContent != null)
+            {
+                createAssetContent.Invoke(assetInfo);
+            } else
+            {
+                assetType.AssetType.OnCreateAssetDefault(assetInfo);
+            }
+            
             Console.WriteLine("Asset of type '" + assetType.Name + "', version '" + assetType.Version + "' created: " + assetInfo.AssetPath);
 
             return assetInfo;
@@ -367,7 +382,7 @@ namespace FlemStudio.AssetManagement.Core
                     Serializer.Serialize(writer, definitionFile);
                 }
             }
-            assetType.AssetType.OnMoveAsset(destinationAssetInfo);
+            //assetType.AssetType.OnMoveAsset(destinationAssetInfo);
 
             Console.WriteLine("Asset moved from '" + currentAssetInfo.AssetPath + "' to '" + destinationAssetInfo.AssetPath + "'.");
             return destinationAssetInfo;
@@ -403,7 +418,7 @@ namespace FlemStudio.AssetManagement.Core
             {
                 throw new Exception("Unknown asset type. Something may broke because of an unmanaged remove.");
             }
-            assetType.AssetType.OnDeleteAsset(assetInfo);
+            //assetType.AssetType.OnDeleteAsset(assetInfo);
             Directory.Delete(assetInfo.FullPath, true);
             Console.WriteLine("Asset removed: " + assetInfo.AssetPath);
 

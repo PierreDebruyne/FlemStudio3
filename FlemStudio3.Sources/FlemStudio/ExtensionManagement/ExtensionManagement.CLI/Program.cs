@@ -1,4 +1,4 @@
-﻿using ExtensionManagement.CLI;
+﻿using FlemStudio.ExtensionManagement.CLI;
 using FlemStudio.ExtensionManagement.Core;
 using System.CommandLine;
 
@@ -17,6 +17,7 @@ public class Program
 
     protected RootCommand RootCommand;
     protected CreateExtensionCommand CreateExtensionCommand;
+    protected UpdateExtensionsCommand UpdateExtensionsCommand;
     public Program()
     {
 
@@ -26,6 +27,9 @@ public class Program
 
         CreateExtensionCommand = new CreateExtensionCommand(ExtensionManager);
         RootCommand.AddCommand(CreateExtensionCommand.Command);
+
+        UpdateExtensionsCommand = new UpdateExtensionsCommand(ExtensionManager);
+        RootCommand.AddCommand(UpdateExtensionsCommand.Command);
     }
 
     public void Run(string[] args)

@@ -33,7 +33,7 @@ namespace FlemStudio.Project.CLI
 
             AssetTypeCommand = new AssetTypeCommand(Project.AssetManager);
             
-            AssetManagerCLI = new AssetManagerCLI(Project.AssetManager);
+            AssetManagerCLI = new AssetManagerCLI(Project.AssetManager, project.ExtensionImporter);
 
            
 

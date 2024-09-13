@@ -1,5 +1,7 @@
 guid: dd3e9e3e-29a0-43a6-8706-a1bd79051679
 name: Test
 version: 0.0.1
-dllPath: C:\Users\Pierre\Desktop\FlemStudio\FlemStudio3\FlemStudio3.Sources\Extensions\Test\TestExtension.Core\bin\Debug\net8.0\TestExtension.Core.dll
-folder: C:\Users\Pierre\Desktop\FlemStudio\FlemStudio3\FlemStudio3.Sources\Extensions\Test\TestExtension.Core\bin\Debug\net8.0\
+dllPaths: [
+  C:\Users\Pierre\Desktop\FlemStudio\FlemStudio3\FlemStudio3.Sources\Extensions\Test\TestExtension.Core\bin\Debug\net8.0\TestExtension.Core.dll
+]
+

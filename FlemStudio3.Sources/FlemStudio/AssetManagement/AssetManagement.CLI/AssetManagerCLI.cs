@@ -1,7 +1,9 @@
 ﻿using FlemStudio.AssetManagement.CLI.AssetDirectories;
 using FlemStudio.AssetManagement.CLI.Assets;
 using FlemStudio.AssetManagement.Core;
+using FlemStudio.ExtensionManagement.Core;
 using System.CommandLine;
+using System.ComponentModel.Composition;
 
 namespace FlemStudio.AssetManagement.CLI
 {
@@ -13,11 +15,11 @@ namespace FlemStudio.AssetManagement.CLI
         public AssetsCLI AssetsCLI { get; }
         public AssetDirectoriesCLI AssetDirectoryCLI { get; }
 
-        public AssetManagerCLI(AssetManager assetManager)
+        public AssetManagerCLI(AssetManager assetManager, ExtensionImporter extensionImporter)
         {
             AssetManager = assetManager;
 
-            AssetsCLI = new AssetsCLI(assetManager);
+            AssetsCLI = new AssetsCLI(assetManager, extensionImporter);
             AssetDirectoryCLI = new AssetDirectoriesCLI(assetManager);
         }
 
@@ -25,4 +27,7 @@ namespace FlemStudio.AssetManagement.CLI
 
 
     }
+
+
+  
 }

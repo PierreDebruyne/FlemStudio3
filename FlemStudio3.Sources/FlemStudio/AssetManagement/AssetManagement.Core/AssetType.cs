@@ -1,6 +1,5 @@
 ﻿using FlemStudio.AssetManagement.Core.Assets;
 using System.ComponentModel.Composition;
-using System.Xml.Linq;
 
 namespace FlemStudio.AssetManagement.Core
 {
@@ -11,9 +10,8 @@ namespace FlemStudio.AssetManagement.Core
         public string Description { get; }
 
         public void Test();
-        public void OnCreateAsset(AssetInfo assetInfo);
-        public void OnMoveAsset(AssetInfo assetInfo);
-        public void OnDeleteAsset(AssetInfo assetInfo);
+        public void OnCreateAssetDefault(AssetInfo assetInfo);
+        
     }
 
 

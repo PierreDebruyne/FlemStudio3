@@ -7,11 +7,17 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="$(SolutionDir)/FlemStudio/Projects/Project.CLI/Project.CLI.csproj" />
+		<ProjectReference Include="$(SolutionDir)/FlemStudio/Projects/Project.CLI/Project.CLI.csproj">
+
+			<PrivateAssets>all</PrivateAssets>
+		</ProjectReference>
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="$(SolutionDir)/Extensions/Test/TestExtension.Core/TestExtension.Core.csproj" />
+		<ProjectReference Include="$(SolutionDir)/Extensions/Test/TestExtension.Core/TestExtension.Core.csproj">
+
+			
+		</ProjectReference>
 	</ItemGroup>
 
 </Project>

@@ -1,4 +1,6 @@
-﻿using FlemStudio.AssetManagement.Core;
+﻿using FlemStudio.AssetManagement.CLI.Assets.Create;
+using FlemStudio.AssetManagement.Core;
+using FlemStudio.ExtensionManagement.Core;
 using System;
 using System.Collections.Generic;
 using System.CommandLine;
@@ -12,16 +14,16 @@ namespace FlemStudio.AssetManagement.CLI.Assets
     {
         protected AssetManager AssetManager;
         public Command Command { get; }
-        protected CreateAssetCommand CreateAssetCommand { get; }
+        protected CreateAssetCommands CreateAssetCommand { get; }
         protected MoveAssetCommand MoveAssetCommand { get; }
         protected RemoveAssetCommand RemoveAssetCommand { get; }
 
-        public AssetsCLI(AssetManager assetManager)
+        public AssetsCLI(AssetManager assetManager, ExtensionImporter extensionImporter)
         {
             AssetManager = assetManager;
             Command = new Command("Asset", "Asset management");
 
-            CreateAssetCommand = new CreateAssetCommand(assetManager);
+            CreateAssetCommand = new CreateAssetCommands(assetManager, extensionImporter);
             Command.AddCommand(CreateAssetCommand.Command);
 
             MoveAssetCommand = new MoveAssetCommand(assetManager);

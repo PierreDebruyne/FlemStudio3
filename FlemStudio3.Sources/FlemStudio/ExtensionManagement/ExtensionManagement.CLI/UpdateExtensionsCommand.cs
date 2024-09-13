@@ -1,39 +1,47 @@
 ﻿using FlemStudio.ExtensionManagement.Core;
+using System;
+using System.Collections.Generic;
 using System.CommandLine;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace FlemStudio.ExtensionManagement.CLI
 {
-    public class CreateExtensionCommand
+    public class UpdateExtensionsCommand
     {
         protected ExtensionManager ExtensionManager;
         public Command Command { get; }
 
-        public CreateExtensionCommand(ExtensionManager extensionManager)
+        public UpdateExtensionsCommand(ExtensionManager extensionManager)
         {
             ExtensionManager = extensionManager;
-            Command = new Command("create", "Create a new extension.");
+            Command = new Command("update", "Update an extension.");
             var nameArgument = new Argument<string>(
                 name: "name",
                 description: "The name of the extension you want to create."
                 );
             Command.AddArgument(nameArgument);
-            var ddlPathArgument = new Argument<string>(
-                name: "dll_path",
-                description: "The path of the ddl file for the extension."
-                );
-            Command.AddArgument(ddlPathArgument);
-            Command.SetHandler((name, dll_path) =>
+            
+            Command.SetHandler((name) =>
             {
                 try
                 {
-                    ExtensionManager.CreateExtension(name, dll_path);
+                    if (name == "all")
+                    {
+                        ExtensionManager.UpdateLocalExtensions();
+                    } else
+                    {
+                        ExtensionManager.UpdateLocalExtension(name);
+                    }
+                    
                 }
                 catch (Exception ex)
                 {
                     Console.WriteLine(ex.Message);
                 }
             },
-            nameArgument, ddlPathArgument);
+            nameArgument);
         }
     }
 }

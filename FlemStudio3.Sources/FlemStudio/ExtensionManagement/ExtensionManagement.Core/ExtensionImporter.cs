@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using YamlDotNet.Serialization.NamingConventions;
 using YamlDotNet.Serialization;
 using System.ComponentModel.Composition.Hosting;
+using System.ComponentModel.Composition.Primitives;
 
 namespace FlemStudio.ExtensionManagement.Core
 {
@@ -20,8 +21,9 @@ namespace FlemStudio.ExtensionManagement.Core
         public ISerializer Serializer { get; }
         public IDeserializer Deserializer { get; }
 
-        public AggregateCatalog Catalog { get; }
-        public ExtensionImporter(string extensionFolderPath)
+        protected ComposablePartCatalog Catalog;
+        public CompositionContainer CompositionContainer { get; }
+        public ExtensionImporter(string extensionFolderPath, IList<Guid> extensionGuids)
         {
             ExtensionFolderPath = extensionFolderPath;
             if (Directory.Exists(ExtensionFolderPath) == false)
@@ -41,21 +43,36 @@ namespace FlemStudio.ExtensionManagement.Core
             Deserializer = new DeserializerBuilder().WithNamingConvention(CamelCaseNamingConvention.Instance).Build();
 
 
-            Catalog = new AggregateCatalog();
+            AggregateCatalog aggregateCatalog = new AggregateCatalog();
 
-
-
-            foreach (var extensionInfo in this.EnumerateExtensions())
+            foreach (ExtensionRegistryEntry entry in ExtensionRegistry.EnumerateEntries())
             {
-
-              
-                if (extensionInfo.Folder != null)
-                {
-                    Catalog.Catalogs.Add(new DirectoryCatalog(extensionInfo.Folder));
-
-                }
-
+                aggregateCatalog.Catalogs.Add(new DirectoryCatalog(ExtensionFolderPath + "/" + entry.Path));
+                Console.WriteLine(ExtensionFolderPath + "/" + entry.Path);
+                
             }
+
+            Catalog = new FilteredCatalog(aggregateCatalog,
+                def => {
+
+                    try
+                    {
+                        if (def.ExportDefinitions.First().Metadata.ContainsKey("Guid")
+                                                && extensionGuids.Contains(Guid.Parse((string)def.ExportDefinitions.First().Metadata["Guid"])))
+                        {
+                            return true;
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                        Console.WriteLine(e.StackTrace);
+                    }
+
+                    return false;
+                });
+            CompositionContainer = new CompositionContainer(Catalog);
+
         }
 
         public IEnumerable<IExtensionInfo> EnumerateExtensions()

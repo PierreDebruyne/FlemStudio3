@@ -35,31 +35,13 @@ namespace FlemStudio.AssetManagement.Core
         protected Dictionary<Guid, AssetTypeDefinition> AssetTypesByGuid = new();
         protected Dictionary<string, AssetTypeDefinition> AssetTypesByName = new();
 
-        public void LoadExtensions(ExtensionImporter extensionImporter, IList<Guid> assetTypeGuids)
+        public void LoadExtensions(ExtensionImporter extensionImporter)
         {
 
-            
 
-            ComposablePartCatalog filteredCatalog = new FilteredCatalog(extensionImporter.Catalog, 
-                def => {
-                    
-                    try
-                    {
-                        if (def.ExportDefinitions.First().Metadata.ContainsKey("Guid")
-                                                && assetTypeGuids.Contains(Guid.Parse((string)def.ExportDefinitions.First().Metadata["Guid"])))
-                        {
-                            return true;
-                        }
-                    } catch (Exception e)
-                    {
-                        Console.WriteLine(e.Message);
-                        Console.WriteLine(e.StackTrace);
-                    }
 
-                        return false;
-                    });
-            var container = new CompositionContainer(filteredCatalog);
-            container.ComposeParts(this);
+
+            extensionImporter.CompositionContainer.ComposeParts(this);
 
             foreach (var item in LoadedAssetTypes)
             {

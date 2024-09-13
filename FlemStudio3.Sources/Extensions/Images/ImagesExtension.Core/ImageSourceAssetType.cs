@@ -35,7 +35,7 @@ namespace ImagesExtension.Core
             image.Dispose();
         }
 
-        public void OnCreateAsset(AssetInfo assetInfo)
+        public void OnCreateAssetDefault(AssetInfo assetInfo)
         {
             ImageSourceAssetConfigFile configFile = new ImageSourceAssetConfigFile()
             {

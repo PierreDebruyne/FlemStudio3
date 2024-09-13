@@ -5,7 +5,6 @@
         public Guid Guid { get; set; }
         public string Name { get; set; }
         public string Version { get; set; }
-        public string Dll_Path { get; set; }
-        public string? Folder { get; set; }
+        public List<string> Dll_Paths { get; set; }
     }
 }

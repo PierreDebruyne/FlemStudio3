@@ -15,10 +15,6 @@ namespace FlemStudio.ExtensionManagement.Core
         public ISerializer Serializer { get; }
         public IDeserializer Deserializer { get; }
 
-
-
-
-
         public ExtensionManager(string extensionFolderPath)
         {
             ExtensionFolderPath = extensionFolderPath;
@@ -83,7 +79,7 @@ namespace FlemStudio.ExtensionManagement.Core
                 Guid = Guid.NewGuid(),
                 Name = extensionName,
                 Version = "0.0.1",
-                Dll_Path = dllPath,
+                Dll_Paths = [dllPath],
             };
             Directory.CreateDirectory(folderPath);
             TextWriter writer = File.CreateText(folderPath + "/" + "Extension.yaml");
@@ -98,6 +94,37 @@ namespace FlemStudio.ExtensionManagement.Core
             });
             ExtensionRegistry.WriteFile(ExtensionRegistryFilePath, ExtensionRegistry);
 
+        }
+
+        public void UpdateLocalExtensions()
+        {
+            foreach (ExtensionRegistryEntry entry in ExtensionRegistry.EnumerateEntries())
+            {
+                
+                UpdateLocalExtension(entry.Path);
+            }
+        }
+
+        public void UpdateLocalExtension(string path)
+        {
+            ExtensionFile extensionFile;
+            using (TextReader reader = File.OpenText(ExtensionFolderPath + "/" + path + "/" + "Extension.yaml"))
+            {
+                extensionFile = Deserializer.Deserialize<ExtensionFile>(reader);
+            }
+            foreach (string dllPath in extensionFile.Dll_Paths)
+            {
+                FileInfo dllFileInfo = new FileInfo(dllPath);
+                if (dllFileInfo.Exists)
+                {
+                    FileInfo destinationFileInfo = new FileInfo(ExtensionFolderPath + "/" + path + "/" + dllFileInfo.Name);
+                    if (destinationFileInfo.Exists == false || destinationFileInfo.LastWriteTime != dllFileInfo.LastWriteTime)
+                    {
+                        dllFileInfo.CopyTo(destinationFileInfo.FullName, true);
+                        Console.WriteLine(destinationFileInfo.FullName + " updated.");
+                    }
+                }
+            }
         }
 
 
