@@ -33,13 +33,15 @@ namespace FlemStudio.AssetManagement.Core
             Name = name;
             Guid = guid;
             Version = version;
+            Context = "core";
         }
 
         public string Name { get; }
         public string Guid { get; }
         public string Version { get; }
+        public string Context { get; }
 
-       
+
     }
 
 

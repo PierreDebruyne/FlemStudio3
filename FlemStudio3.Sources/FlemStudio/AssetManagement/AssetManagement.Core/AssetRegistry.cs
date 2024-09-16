@@ -185,6 +185,27 @@ namespace FlemStudio.AssetManagement.Core
             return RootAssetDirectoriesByName.TryGetValue(rootDirectoryName, out rootAssetDirectory);
         }
 
+        public bool TryGetAssetDirectory(string assetPath, out AssetDirectory? assetDirectory)
+        {
+            assetPath = AssetManager.FormatAssetPath(assetPath);
+            if (AssetDirectoriesByPath.TryGetValue(assetPath, out IAssetContainer? assetContainer))
+            {
+                if (assetContainer is AssetDirectory)
+                {
+                    assetDirectory = (AssetDirectory)assetContainer;
+                    return true;
+                }
+            }
+            assetDirectory = null;
+            return false;
+        }
+
+        public bool TryGetAsset(string assetPath, out Asset? asset)
+        {
+            assetPath = AssetManager.FormatAssetPath(assetPath);
+            return AssetsByPath.TryGetValue(assetPath, out asset);
+        }
+
         public IEnumerable<RootAssetDirectory> EnumerateRootAssetDirectory()
         {
             foreach (RootAssetDirectory rootAssetDirectory in RootAssetDirectoriesByName.Values)
@@ -192,5 +213,49 @@ namespace FlemStudio.AssetManagement.Core
                 yield return rootAssetDirectory;
             }
         }
+
+        /*
+        public void UnregisterAsset(IAssetInfo info)
+        {
+            if (AssetsByPath.TryGetValue(info.AssetPath, out Asset? asset) == false)
+            {
+                throw new Exception("This asset is not registered: " + info.AssetPath);
+            }
+            UnregisterAsset(asset);
+
+        }
+        */
+
+        public void UnregisterAsset(Asset asset)
+        {
+            asset.ParentDirectory?.RemoveChild(asset);
+            AssetsByPath.Remove(asset.Info.AssetPath);
+            AssetsByGuid.Remove(asset.Definition.Guid);
+        }
+
+        public void UnregisterAssetDirectory(AssetDirectory directory)
+        {
+            AssetDirectory? childDirectory = directory.FirstDirectory();
+            while (childDirectory != null)
+            {
+                UnregisterAssetDirectory(childDirectory);
+                childDirectory = directory.FirstDirectory();
+            }
+            Asset? childAsset = directory.FirstAsset();
+            while (childAsset != null)
+            {
+                UnregisterAsset(childAsset);
+                childAsset = directory.FirstAsset();
+            }
+            
+
+            directory.ParentContainer?.RemoveChild(directory);
+            AssetDirectoriesByPath.Remove(directory.Info.AssetPath);
+            AssetDirectoriesByGuid.Remove(directory.Definition.Guid);
+
+
+        }
+
+        
     }
 }

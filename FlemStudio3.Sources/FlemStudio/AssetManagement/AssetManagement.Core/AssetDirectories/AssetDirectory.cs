@@ -77,5 +77,17 @@ namespace FlemStudio.AssetManagement.Core.AssetDirectories
         {
             return ChildDirectories;
         }
+
+        internal AssetDirectory? FirstDirectory()
+        {
+            if (ChildDirectories.Count == 0) return null;
+            return ChildDirectories[0];
+        }
+
+        internal Asset? FirstAsset()
+        {
+            if (ChildAssets.Count == 0) return null;
+            return ChildAssets[0];
+        }
     }
 }

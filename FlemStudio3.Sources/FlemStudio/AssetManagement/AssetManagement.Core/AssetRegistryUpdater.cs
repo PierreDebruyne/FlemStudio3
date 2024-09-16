@@ -72,12 +72,33 @@ namespace FlemStudio.AssetManagement.Core
             if (path.EndsWith(AssetManager.AssetDirectoryDefinitionFileName))
             {
                 AssetDirectoryInfo info = rootDirectory.Info.GetAssetDirectoryInfo(string.Join("/", path.Split("/").SkipLast(1)));
-                //AssetRegistry.UnregisterAssetDirectory(info);
+                if (AssetRegistry.TryGetAssetDirectory(info.AssetPath, out AssetDirectory? assetDirectory))
+                {
+                    AssetRegistry.UnregisterAssetDirectory(assetDirectory);
+                }
             }
             else if (path.EndsWith(AssetManager.AssetDefinitionFileName))
             {
                 AssetInfo info = rootDirectory.Info.GetAssetInfo(string.Join("/", path.Split("/").SkipLast(1)));
-                //AssetRegistry.UnregisterAsset(info);
+                Console.WriteLine("Try remove: " + info.AssetPath);
+                if (AssetRegistry.TryGetAsset(info.AssetPath, out Asset? asset))
+                {
+                    AssetRegistry.UnregisterAsset(asset);
+                }
+                
+            }
+            else
+            {
+                AssetDirectoryInfo directoryInfo = rootDirectory.Info.GetAssetDirectoryInfo(path);
+                if (AssetRegistry.TryGetAssetDirectory(directoryInfo.AssetPath, out AssetDirectory? assetDirectory))
+                {
+                    AssetRegistry.UnregisterAssetDirectory(assetDirectory);
+                }
+                AssetInfo assetInfo = rootDirectory.Info.GetAssetInfo(path);
+                if (AssetRegistry.TryGetAsset(assetInfo.AssetPath, out Asset? asset))
+                {
+                    AssetRegistry.UnregisterAsset(asset);
+                }
             }
         }
 

@@ -18,7 +18,7 @@ namespace FlemStudio.AssetManagement.Avalonia
         public override double MinWidth => 800;
 
 
-        private string _Name = "ssss";
+        private string _Name = "";
         public string Name
         {
             get => _Name;

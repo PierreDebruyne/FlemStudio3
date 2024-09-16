@@ -62,7 +62,7 @@ namespace FlemStudio.ExtensionManagement.Core
             }
         }
 
-        public void CreateExtension(string extensionName, string dllPath)
+        public void CreateExtension(string extensionName, string context, string dllPath)
         {
             ExtensionRegistry.TryGetEntry(extensionName, out ExtensionRegistryEntry? entry);
             if (entry != null)
@@ -91,6 +91,7 @@ namespace FlemStudio.ExtensionManagement.Core
                 Name = extensionName,
                 Guid = extensionFile.Guid,
                 Path = extensionName,
+                Context = context,
             });
             ExtensionRegistry.WriteFile(ExtensionRegistryFilePath, ExtensionRegistry);
 

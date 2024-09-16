@@ -15,7 +15,7 @@ namespace FlemStudio.Project.Core
         //public ProjectExtensionManager ExtensionManager { get; }
         public AssetManager AssetManager { get; }
 
-        public FlemStudioProject(string installDirectory, string projectFilePath)
+        public FlemStudioProject(string installDirectory, string projectFilePath, List<string> contexts)
         {
             InstallDirectory = installDirectory;
             ProjectFilePath = projectFilePath;
@@ -30,7 +30,7 @@ namespace FlemStudio.Project.Core
             //ExtensionManager.LoadExtensions(ProjectFile.Extensions);
             //ExtensionManager.TestExtensions();
 
-            ExtensionImporter = new ExtensionImporter(installDirectory + "/" + "Extensions", ProjectFile.Extensions);
+            ExtensionImporter = new ExtensionImporter(installDirectory + "/" + "Extensions", ProjectFile.Extensions, contexts);
 
             AssetManager = new AssetManager(ProjectDirectoryPath, ExtensionImporter);
             

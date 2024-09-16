@@ -14,7 +14,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="$(SolutionDir)/Extensions/Test/TestExtension.Core/TestExtension.Core.csproj"/>
+		<ProjectReference Include="$(SolutionDir)/Extensions/Images/ImagesExtension.Core/ImagesExtension.Core.csproj"/>
 	</ItemGroup>
 
 </Project>

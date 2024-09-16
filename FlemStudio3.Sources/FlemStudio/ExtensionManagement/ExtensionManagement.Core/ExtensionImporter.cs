@@ -23,7 +23,7 @@ namespace FlemStudio.ExtensionManagement.Core
 
         protected ComposablePartCatalog Catalog;
         public CompositionContainer CompositionContainer { get; }
-        public ExtensionImporter(string extensionFolderPath, IList<Guid> extensionGuids)
+        public ExtensionImporter(string extensionFolderPath, IList<Guid> extensionGuids, IList<string> contexts)
         {
             ExtensionFolderPath = extensionFolderPath;
             if (Directory.Exists(ExtensionFolderPath) == false)
@@ -47,8 +47,12 @@ namespace FlemStudio.ExtensionManagement.Core
 
             foreach (ExtensionRegistryEntry entry in ExtensionRegistry.EnumerateEntries())
             {
-                aggregateCatalog.Catalogs.Add(new DirectoryCatalog(ExtensionFolderPath + "/" + entry.Path));
-                Console.WriteLine(ExtensionFolderPath + "/" + entry.Path);
+                if (contexts.Contains(entry.Context))
+                {
+                    aggregateCatalog.Catalogs.Add(new DirectoryCatalog(ExtensionFolderPath + "/" + entry.Path));
+                    Console.WriteLine(ExtensionFolderPath + "/" + entry.Path);
+                }
+                
                 
             }
 
@@ -58,7 +62,8 @@ namespace FlemStudio.ExtensionManagement.Core
                     try
                     {
                         if (def.ExportDefinitions.First().Metadata.ContainsKey("Guid")
-                                                && extensionGuids.Contains(Guid.Parse((string)def.ExportDefinitions.First().Metadata["Guid"])))
+                            && extensionGuids.Contains(Guid.Parse((string)def.ExportDefinitions.First().Metadata["Guid"]))
+                            )
                         {
                             return true;
                         }

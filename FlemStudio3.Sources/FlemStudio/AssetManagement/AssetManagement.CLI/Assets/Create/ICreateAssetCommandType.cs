@@ -31,12 +31,13 @@ namespace FlemStudio.AssetManagement.CLI.Assets.Create
             Name = name;
             Guid = guid;
             Version = version;
+            Context = "cli";
         }
 
         public string Name { get; }
         public string Guid { get; }
         public string Version { get; }
-
+        public string Context { get; }
 
     }
 }

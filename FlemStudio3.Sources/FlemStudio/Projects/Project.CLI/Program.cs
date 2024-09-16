@@ -24,7 +24,7 @@ public class Program
     public Program(string projectFilePath)
     {
 
-        Project = new FlemStudioProject(InstallDirectory, projectFilePath);
+        Project = new FlemStudioProject(InstallDirectory, projectFilePath, ["core", "cli"]);
         ProjectCLI = new FlemStudioProjectCLI(InstallDirectory, Project);
     }
 

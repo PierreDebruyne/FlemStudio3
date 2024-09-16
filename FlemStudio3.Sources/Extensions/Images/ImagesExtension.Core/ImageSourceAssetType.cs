@@ -10,18 +10,21 @@ using YamlDotNet.Serialization;
 using ImagesExtension.Core.Properties;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
+using System.ComponentModel.Composition;
 
 namespace ImagesExtension.Core
 {
+    [PartCreationPolicy(CreationPolicy.Shared)]
+    [Export(typeof(ImageSourceAssetType))]
     [AssetType(name: "ImageSource", guid: "00000000-0000-0000-0000-000000000002", version: "0.0.1")]
-    public class ImageSourceAssetType2 : IAssetType
+    public class ImageSourceAssetType : IAssetType
     {
         public ISerializer Serializer { get; }
         public IDeserializer Deserializer { get; }
 
         public string Alias => "Image source";
         public string Description => "This is an image source asset.";
-        public ImageSourceAssetType2()
+        public ImageSourceAssetType()
         {
             Serializer = new SerializerBuilder().WithNamingConvention(CamelCaseNamingConvention.Instance).Build();
             Deserializer = new DeserializerBuilder().WithNamingConvention(CamelCaseNamingConvention.Instance).Build();
@@ -42,7 +45,6 @@ namespace ImagesExtension.Core
                 ImagePath = "grid.png"
             };
 
-            //Directory.CreateDirectory(assetInfo.FullPath);
             using (TextWriter writer = File.CreateText(assetInfo.FullPath + "/" + "Config.yaml"))
             {
                 Serializer.Serialize(writer, configFile);
@@ -51,6 +53,27 @@ namespace ImagesExtension.Core
             Image<Rgba32> image = Image.Load<Rgba32>(Resources.grid);
             image.Save(assetInfo.FullPath + "/" + "grid.png");
             image.Dispose();
+        }
+
+        public void OnCreateAsset(AssetInfo assetInfo, string imagePath)
+        {
+            FileInfo imageFileInfo = new FileInfo(imagePath);
+            if (imageFileInfo.Exists == false)
+            {
+                throw new Exception("Image not found: " + imagePath);
+            }
+            Image<Rgba32> image = Image.Load<Rgba32>(imagePath);
+            image.Save(assetInfo.FullPath + "/" + imageFileInfo.Name);
+
+            ImageSourceAssetConfigFile configFile = new ImageSourceAssetConfigFile()
+            {
+                ImagePath = imageFileInfo.Name
+            };
+
+            using (TextWriter writer = File.CreateText(assetInfo.FullPath + "/" + "Config.yaml"))
+            {
+                Serializer.Serialize(writer, configFile);
+            }
         }
 
         public void OnMoveAsset(AssetInfo assetInfo)

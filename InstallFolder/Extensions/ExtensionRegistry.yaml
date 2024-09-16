@@ -1,9 +1,16 @@
 - guid: dd3e9e3e-29a0-43a6-8706-a1bd79051679
   name: Test
   path: Test
+  context: core
 - guid: 924dfc6c-323d-4d31-a6f6-5ab9ca68c891
   name: Test-cli
   path: Test-cli
+  context: cli
 - guid: 64d6b915-9f8e-48dc-bcd5-4a020fae8a5e
   name: Images
   path: Images
+  context: core
+- guid: 5bac7429-cd58-4bd0-9029-c62283fffb70
+  name: Images-cli
+  path: Images-cli
+  context: cli

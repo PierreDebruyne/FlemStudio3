@@ -71,7 +71,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application.Avalonia", "Fle
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{C8265D7B-B8BF-4BC4-AC28-81863B8C1D32}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImagesExtension.Core", "Extensions\Images\ImagesExtension.Core\ImagesExtension.Core.csproj", "{574B29D6-9E00-4BD6-AAD6-AEFB8893CC12}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ImagesExtension.Core", "Extensions\Images\ImagesExtension.Core\ImagesExtension.Core.csproj", "{574B29D6-9E00-4BD6-AAD6-AEFB8893CC12}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ImagesExtension.CLI", "Extensions\Images\ImagesExtension.CLI\ImagesExtension.CLI.csproj", "{F0DA2E07-7E91-44BB-AC15-0905122B4798}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -171,6 +173,10 @@ Global
 		{574B29D6-9E00-4BD6-AAD6-AEFB8893CC12}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{574B29D6-9E00-4BD6-AAD6-AEFB8893CC12}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{574B29D6-9E00-4BD6-AAD6-AEFB8893CC12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0DA2E07-7E91-44BB-AC15-0905122B4798}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0DA2E07-7E91-44BB-AC15-0905122B4798}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0DA2E07-7E91-44BB-AC15-0905122B4798}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0DA2E07-7E91-44BB-AC15-0905122B4798}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -209,6 +215,7 @@ Global
 		{14B8DE1A-7277-4453-8A47-89B4094FA586} = {669CAB74-2DC9-4401-97A6-A712B1FE4A4D}
 		{C8265D7B-B8BF-4BC4-AC28-81863B8C1D32} = {186217F8-D943-41F5-9565-A095C1A31E58}
 		{574B29D6-9E00-4BD6-AAD6-AEFB8893CC12} = {C8265D7B-B8BF-4BC4-AC28-81863B8C1D32}
+		{F0DA2E07-7E91-44BB-AC15-0905122B4798} = {C8265D7B-B8BF-4BC4-AC28-81863B8C1D32}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A3BE9375-F9E1-41BE-AA32-C58D756A1CAB}

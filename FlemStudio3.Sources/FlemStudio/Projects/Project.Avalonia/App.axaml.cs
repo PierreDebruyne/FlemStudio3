@@ -41,7 +41,7 @@ public partial class App : Application
                 throw new Exception("No project to open.");
             }
 
-            Project = new FlemStudioProject(InstallDirectory, desktop.Args[0]);
+            Project = new FlemStudioProject(InstallDirectory, desktop.Args[0], ["core", "avalonia"]);
             ProjectUI = new FlemStudioProjectUI(Project, Project.ProjectDirectoryPath + "/" + "UI");
             ProjectAvalonia = new FlemStudioProjectAvalonia(ProjectUI);
 

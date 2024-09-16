@@ -22,7 +22,7 @@ namespace FlemStudio.AssetManagement.Core
 
             FileSystemWatcher = new FileSystemWatcher(RootAssetDirectory.Info.FullPath);
 
-            FileSystemWatcher.NotifyFilter = NotifyFilters.FileName | NotifyFilters.LastWrite;
+            FileSystemWatcher.NotifyFilter = NotifyFilters.FileName | NotifyFilters.LastWrite | NotifyFilters.DirectoryName;
                 //NotifyFilters.Attributes
             //                     | NotifyFilters.CreationTime
             //                     | NotifyFilters.DirectoryName
@@ -45,6 +45,7 @@ namespace FlemStudio.AssetManagement.Core
             //Console.WriteLine(FileSystemWatcher.Filter);
 
             FileSystemWatcher.IncludeSubdirectories = true;
+            
             FileSystemWatcher.EnableRaisingEvents = true;
 
         }
