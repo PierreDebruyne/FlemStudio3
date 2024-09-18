@@ -1,10 +1,5 @@
 ﻿using FlemStudio.LayoutManagement.Core.Layouts;
 using ReactiveUI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FlemStudio.LayoutManagement.Avalonia.Layouts
 {
@@ -18,7 +13,7 @@ namespace FlemStudio.LayoutManagement.Avalonia.Layouts
         {
             LayoutService = layoutService;
 
-            
+
         }
 
         public void AddLayoutType(LayoutViewModelType type)
@@ -119,7 +114,7 @@ namespace FlemStudio.LayoutManagement.Avalonia.Layouts
 
         public abstract void Dispose();
 
-        
+
     }
 
     public abstract class LayoutViewModelType
@@ -147,9 +142,9 @@ namespace FlemStudio.LayoutManagement.Avalonia.Layouts
 
     public abstract class LayoutContainerViewModel : LayoutViewModel
     {
-        protected LayoutContainerViewModel(LayoutViewModelService layoutViewModelService, LayoutViewModelType layoutType): base(layoutViewModelService, layoutType)
+        protected LayoutContainerViewModel(LayoutViewModelService layoutViewModelService, LayoutViewModelType layoutType) : base(layoutViewModelService, layoutType)
         {
-            
+
         }
 
         private bool _IsFocus = false;

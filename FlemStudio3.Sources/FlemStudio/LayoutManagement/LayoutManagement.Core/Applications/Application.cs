@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using YamlDotNet.Serialization;
-using YamlDotNet.Serialization.NamingConventions;
-
-namespace FlemStudio.LayoutManagement.Core.Applications
+﻿namespace FlemStudio.LayoutManagement.Core.Applications
 {
     public abstract class Application
     {
@@ -18,7 +9,7 @@ namespace FlemStudio.LayoutManagement.Core.Applications
     public abstract class Application<TApplicationState> : Application
     {
         protected TApplicationState State { get; }
-        
+
         protected Application(TApplicationState state)
         {
             State = state;
@@ -89,7 +80,7 @@ namespace FlemStudio.LayoutManagement.Core.Applications
                 {
                     SaveCooldown = null;
                     Save();
-                    
+
                 }
             }
         }
@@ -99,7 +90,7 @@ namespace FlemStudio.LayoutManagement.Core.Applications
             if (SaveCooldown != null)
             {
                 Save();
-                
+
             }
             Application.OnStateUpdated -= OnStateUpdated;
             Application.Dispose();
@@ -158,7 +149,7 @@ namespace FlemStudio.LayoutManagement.Core.Applications
 
     public abstract class ApplicationUser<TApplication> : ApplicationUser, IDisposable where TApplication : Application
     {
-        
+
         protected TApplication Application;
         protected ApplicationUser(LoadedApplication loadedApplication) : base(loadedApplication)
         {
@@ -192,9 +183,9 @@ namespace FlemStudio.LayoutManagement.Core.Applications
 
     public abstract class ApplicationType<TApplication, TApplicationUser> : ApplicationType where TApplication : Application where TApplicationUser : ApplicationUser
     {
-        public ApplicationType(string name) : base (name, typeof(TApplication), typeof(TApplicationUser))
+        public ApplicationType(string name) : base(name, typeof(TApplication), typeof(TApplicationUser))
         {
-    
+
         }
 
         public override Application LoadApplication(string path)
@@ -227,7 +218,7 @@ namespace FlemStudio.LayoutManagement.Core.Applications
 
     }
 
-    
+
 
 
 }

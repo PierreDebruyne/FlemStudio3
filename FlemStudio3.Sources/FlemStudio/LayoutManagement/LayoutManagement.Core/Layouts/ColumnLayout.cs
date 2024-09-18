@@ -1,7 +1,7 @@
 ﻿using System.Collections.Concurrent;
 using System.Diagnostics;
-using YamlDotNet.Serialization.NamingConventions;
 using YamlDotNet.Serialization;
+using YamlDotNet.Serialization.NamingConventions;
 
 namespace FlemStudio.LayoutManagement.Core.Layouts
 {
@@ -39,7 +39,7 @@ namespace FlemStudio.LayoutManagement.Core.Layouts
             loadedLayout.Dispose();
         }
 
-        
+
         internal void SaveLayout(ColumnLayout layout)
         {
             string path = GetPathFromGuid(layout.Guid);
@@ -47,7 +47,7 @@ namespace FlemStudio.LayoutManagement.Core.Layouts
             {
                 Serializer.Serialize(writer, layout.Config);
             }
-            
+
             Debug.WriteLine("Column layout saved: " + path);
         }
 

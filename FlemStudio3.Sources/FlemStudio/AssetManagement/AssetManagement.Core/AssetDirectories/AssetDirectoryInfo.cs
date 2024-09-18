@@ -66,13 +66,13 @@ namespace FlemStudio.AssetManagement.Core.AssetDirectories
 
         public IAssetContainerInfo? GetParentInfo()
         {
-            
+
             string parentPath = string.Join("/", Path.Split("/").SkipLast(1));
             if (parentPath.Length == 0)
             {
                 return RootAssetDirectoryInfo;
             }
-            
+
             return RootAssetDirectoryInfo.GetAssetDirectoryInfo(parentPath);
         }
     }

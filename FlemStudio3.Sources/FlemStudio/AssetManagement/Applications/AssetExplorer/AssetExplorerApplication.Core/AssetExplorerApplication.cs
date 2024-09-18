@@ -1,11 +1,8 @@
 ﻿using FlemStudio.AssetManagement.Core;
+using FlemStudio.AssetManagement.Core.AssetDirectories;
+using FlemStudio.AssetManagement.Core.Assets;
 using FlemStudio.AssetManagement.Core.RootAssetDirectories;
 using FlemStudio.LayoutManagement.Core.Applications;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FlemStudio.AssetExplorerApplication.Core
 {
@@ -33,7 +30,7 @@ namespace FlemStudio.AssetExplorerApplication.Core
 
         public override void Dispose()
         {
-            
+
         }
 
         public Action<string, string>? OnCurrentAssetPathUpdated { get; set; }
@@ -66,6 +63,16 @@ namespace FlemStudio.AssetExplorerApplication.Core
         {
             return AssetManager.AssetRegistry.EnumerateRootAssetDirectory();
         }
+
+        internal void RemoveDirectory(AssetDirectory directory)
+        {
+            AssetManager.RemoveAssetDirectory(directory, true);
+        }
+
+        internal void RemoveAsset(Asset asset)
+        {
+            AssetManager.RemoveAsset(asset);
+        }
     }
 
     public class AssetExplorerApplicationUser : ApplicationUser<AssetExplorerApplication>, IAssetExplorerApplication
@@ -86,13 +93,13 @@ namespace FlemStudio.AssetExplorerApplication.Core
             OnCurrentAssetPathUpdated?.Invoke(oldValue, newValue);
         }
 
-        
+
 
         public Action<string, string>? OnCurrentAssetPathUpdated { get; set; }
-        public string CurrentAssetPath 
-        { 
-            get => Application.CurrentAssetPath; 
-            set => Application.CurrentAssetPath = value; 
+        public string CurrentAssetPath
+        {
+            get => Application.CurrentAssetPath;
+            set => Application.CurrentAssetPath = value;
         }
 
         public IAssetContainer? CurrentAssetContainer => Application.CurrentAssetContainer;
@@ -101,5 +108,16 @@ namespace FlemStudio.AssetExplorerApplication.Core
         {
             return Application.EnumerateRootAssetDirectory();
         }
+
+        public void RemoveDirectory(AssetDirectory directory)
+        {
+            Application.RemoveDirectory(directory);
+        }
+
+        public void RemoveAsset(Asset asset)
+        {
+            Application.RemoveAsset(asset);
+        }
+
     }
 }

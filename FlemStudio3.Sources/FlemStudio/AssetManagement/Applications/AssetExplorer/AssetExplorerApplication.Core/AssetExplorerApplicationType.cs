@@ -1,11 +1,6 @@
 ﻿using FlemStudio.AssetManagement.Core;
 using FlemStudio.LayoutManagement.Core.Applications;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
@@ -56,5 +51,5 @@ namespace FlemStudio.AssetExplorerApplication.Core
         }
     }
 
-    
+
 }

@@ -2,17 +2,17 @@
 {
     public class Asset
     {
-        
 
-        public IAssetInfo Info { get; }
+
+        public AssetInfo Info { get; }
         public IAssetDefinition Definition { get; }
 
 
-        public Asset(IAssetInfo info, IAssetDefinition definition)
+        public Asset(AssetInfo info, IAssetDefinition definition)
         {
             Info = info;
             Definition = definition;
-            
+
 
         }
         private IAssetContainer? _ParentDirectory;

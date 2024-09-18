@@ -1,8 +1,6 @@
 ﻿
 using FlemStudio.LayoutManagement.Core.Layouts;
 using ReactiveUI;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace FlemStudio.LayoutManagement.Avalonia.Layouts
@@ -34,7 +32,7 @@ namespace FlemStudio.LayoutManagement.Avalonia.Layouts
         protected RowLayoutViewModelType LayoutViewModelType;
         internal RowLayoutUser RowLayout;
 
-     
+
 
         public RowLayoutViewModel(LayoutViewModelService layoutViewModelService, RowLayoutViewModelType layoutViewModelType, RowLayoutUser rowLayout) : base(layoutViewModelService, layoutViewModelType)
         {

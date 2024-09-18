@@ -1,13 +1,7 @@
 ﻿using FlemStudio.AssetManagement.Core;
 using FlemStudio.AssetManagement.Core.RootAssetDirectories;
 using ReactiveUI;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FlemStudio.AssetExplorerApplication.Avalonia
 {
@@ -28,14 +22,15 @@ namespace FlemStudio.AssetExplorerApplication.Avalonia
         public ObservableCollection<RootAssetDirectoryListItemViewModel> Items { get; protected set; } = new();
         public RootAssetDirectoryListItemViewModel? SelectedItem { get; protected set; }
 
-        public RootAssetDirectoryListViewModel(IEnumerable<RootAssetDirectory> rootAssetDirectoryList) {
+        public RootAssetDirectoryListViewModel(IEnumerable<RootAssetDirectory> rootAssetDirectoryList)
+        {
 
             foreach (RootAssetDirectory rootAssetDirectory in rootAssetDirectoryList)
             {
                 RootAssetDirectoryListItemViewModel item = new RootAssetDirectoryListItemViewModel(rootAssetDirectory);
                 Items.Add(item);
             }
-            
+
 
         }
 
@@ -58,9 +53,9 @@ namespace FlemStudio.AssetExplorerApplication.Avalonia
             if (SelectedItem != null)
             {
                 OnNavigation?.Invoke(SelectedItem.RootAssetDirectory);
-                
+
             }
-            
+
             return true;
         }
     }

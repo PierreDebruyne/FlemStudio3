@@ -8,9 +8,9 @@ namespace FlemStudio.AssetExplorerApplication.Avalonia
         {
             InitializeComponent();
 
-            
+
         }
 
-       
+
     }
 }

@@ -10,7 +10,7 @@ namespace TestExtension.Core
 {
     [PartCreationPolicy(CreationPolicy.Shared)]
     [Export(typeof(TestAssetType))]
-    
+
     [AssetType(name: "Test", guid: "00000000-0000-0000-0000-000000000001", version: "0.0.1")]
     public class TestAssetType : IAssetType
     {
@@ -55,11 +55,11 @@ namespace TestExtension.Core
 
         }
 
-        
+
 
         public void OnDeleteAsset(AssetInfo assetInfo)
         {
-            
+
         }
     }
 }

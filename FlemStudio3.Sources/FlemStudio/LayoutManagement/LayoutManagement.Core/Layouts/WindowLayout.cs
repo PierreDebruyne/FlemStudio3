@@ -37,7 +37,7 @@ namespace FlemStudio.LayoutManagement.Core.Layouts
             loadedLayout.Dispose();
         }
 
-        
+
         internal void SaveLayout(WindowLayout layout)
         {
             string path = GetPathFromGuid(layout.Guid);

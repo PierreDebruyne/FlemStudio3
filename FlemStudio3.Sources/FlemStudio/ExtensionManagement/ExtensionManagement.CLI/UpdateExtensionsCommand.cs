@@ -1,10 +1,5 @@
 ﻿using FlemStudio.ExtensionManagement.Core;
-using System;
-using System.Collections.Generic;
 using System.CommandLine;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FlemStudio.ExtensionManagement.CLI
 {
@@ -22,7 +17,7 @@ namespace FlemStudio.ExtensionManagement.CLI
                 description: "The name of the extension you want to create."
                 );
             Command.AddArgument(nameArgument);
-            
+
             Command.SetHandler((name) =>
             {
                 try
@@ -30,11 +25,12 @@ namespace FlemStudio.ExtensionManagement.CLI
                     if (name == "all")
                     {
                         ExtensionManager.UpdateLocalExtensions();
-                    } else
+                    }
+                    else
                     {
                         ExtensionManager.UpdateLocalExtension(name);
                     }
-                    
+
                 }
                 catch (Exception ex)
                 {

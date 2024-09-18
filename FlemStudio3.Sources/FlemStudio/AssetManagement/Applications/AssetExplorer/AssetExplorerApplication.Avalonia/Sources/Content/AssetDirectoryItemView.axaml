@@ -6,16 +6,10 @@
 			 x:Class="FlemStudio.AssetExplorerApplication.Avalonia.AssetDirectoryItemView">
 
 
-	<StackPanel Width="75"  Margin="3" Background="Transparent" Cursor="Hand" Name="Container">
-		<StackPanel.ContextMenu>
-			<ContextMenu>
-				<MenuItem Header="Open"/>
-				<MenuItem Header="Rename"/>
-				<MenuItem Header="Delete"/>
-			</ContextMenu>
-		</StackPanel.ContextMenu>
-		<Image Source="/Assets/directory_preview.png" Width="69" Height="69"></Image>
-		<TextBlock HorizontalAlignment="Center" FontSize="11" Text="{Binding Name}" TextWrapping="Wrap"></TextBlock>
+	<StackPanel>
+		<Image Source="/Assets/directory_preview.png" Width="60" Height="60"></Image>
+		<TextBlock HorizontalAlignment="Center" FontSize="11" Text="{Binding Name}" TextWrapping="Wrap" ZIndex="2"></TextBlock>
 	</StackPanel>
+
 
 </UserControl>

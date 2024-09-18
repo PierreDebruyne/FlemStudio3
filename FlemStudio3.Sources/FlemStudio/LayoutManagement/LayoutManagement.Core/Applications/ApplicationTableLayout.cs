@@ -42,7 +42,7 @@ namespace FlemStudio.LayoutManagement.Core.Applications
             loadedLayout.Dispose();
         }
 
-        
+
         internal void SaveLayout(ApplicationTableLayout layout)
         {
             string path = GetPathFromGuid(layout.Guid);

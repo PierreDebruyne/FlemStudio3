@@ -1,7 +1,4 @@
-﻿
-
-using System;
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
 
 namespace FlemStudio.LayoutManagement.Core.Applications
 {
@@ -81,14 +78,15 @@ namespace FlemStudio.LayoutManagement.Core.Applications
             try
             {
                 return (TApplicationUser)user;
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 user.Dispose();
                 throw new Exception("Wrong cast", ex);
             }
         }
 
-        
+
 
         public ApplicationUser UseNewApplication(string applicationTypeName, string? tag = null)
         {
@@ -98,7 +96,7 @@ namespace FlemStudio.LayoutManagement.Core.Applications
             }
             if (ApplicationTypesByName.TryGetValue(applicationTypeName, out ApplicationType applicationType))
             {
-                
+
                 Guid guid = Registry.NewGuid();
                 Application application = applicationType.CreateApplication(GetApplicationPath(guid, applicationType));
                 Registry.AddApplication(guid, applicationTypeName, tag);
@@ -121,7 +119,8 @@ namespace FlemStudio.LayoutManagement.Core.Applications
             if (ApplicationTypesByUserType.TryGetValue(typeof(TApplicationUser), out ApplicationType applicationType))
             {
                 return (TApplicationUser)UseNewApplication(applicationType.Name, tag);
-            } else
+            }
+            else
             {
                 throw new Exception("This application user type is not implemented: " + typeof(TApplicationUser));
             }
@@ -165,7 +164,7 @@ namespace FlemStudio.LayoutManagement.Core.Applications
                 throw new Exception("This application type is not implemented: " + entry.Type);
             }
 
-            
+
         }
 
         public void Update(float deltaTime)

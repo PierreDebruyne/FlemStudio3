@@ -2,7 +2,6 @@
 using FlemStudio.AssetManagement.Core.Assets;
 using FlemStudio.AssetManagement.Core.RootAssetDirectories;
 using FlemStudio.ExtensionManagement.Core;
-using System.Diagnostics;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
@@ -21,7 +20,7 @@ namespace FlemStudio.AssetManagement.Core
         protected AssetTypeRegistry AssetTypeRegistry = new();
 
 
-       
+
 
         public AssetRegistry AssetRegistry { get; }
         protected AssetRegistryUpdater AssetRegistryUpdater;
@@ -39,7 +38,7 @@ namespace FlemStudio.AssetManagement.Core
             AssetTypeRegistry.TestExtensions();
 
             AssetRegistry = new AssetRegistry(this);
-            
+
 
             AssetRegistryUpdater = new AssetRegistryUpdater(AssetRegistry);
 
@@ -48,7 +47,7 @@ namespace FlemStudio.AssetManagement.Core
             //RootDirectoriesRegistry.Add(localAssetInfo.Name, localAssetInfo);
 
             AssetRegistry.RegisterRootAssetDirectory(localAssetInfo, true);
-            
+
 
             //LocalAssetWatcher = new RootAssetFolderWatcher(LocalAssets);
         }
@@ -65,7 +64,7 @@ namespace FlemStudio.AssetManagement.Core
             AssetRegistryUpdater.Update(deltaTime);
         }
 
-        
+
 
         public IEnumerable<AssetTypeDefinition> EnumerateAssetTypes()
         {
@@ -77,11 +76,11 @@ namespace FlemStudio.AssetManagement.Core
             return AssetTypeRegistry.TryGetAssetType(guid, out assetType);
         }
 
-        
 
-        
-       
-        
+
+
+
+
 
         public AssetDirectoryInfo CreateAssetDirectory(string rootDirectoryName, string? parentDirectoryPath, string name)
         {
@@ -103,7 +102,7 @@ namespace FlemStudio.AssetManagement.Core
             AssetDirectoryInfo directoryInfo = rootDirectory.Info.GetAssetDirectoryInfo(parentDirectoryPath);
             return CreateAssetDirectory(directoryInfo, name);
 
-            
+
         }
 
         public AssetDirectoryInfo CreateAssetDirectory(IAssetContainerInfo containerInfo, string name)
@@ -115,7 +114,7 @@ namespace FlemStudio.AssetManagement.Core
 
 
             AssetDirectoryInfo assetDirectoryInfo = containerInfo.GetAssetDirectoryInfo(name);
-            
+
 
             if (assetDirectoryInfo.DefinitionFileExist)
             {
@@ -185,7 +184,7 @@ namespace FlemStudio.AssetManagement.Core
                     Serializer.Serialize(writer, definitionFile);
                 }
             }
-            
+
 
             Console.WriteLine("Asset directory moved from '" + currentDirectoryInfo.AssetPath + "' to '" + destinationDirectoryInfo.AssetPath + "'.");
             return destinationDirectoryInfo;
@@ -237,8 +236,13 @@ namespace FlemStudio.AssetManagement.Core
 
         }
 
+        public void RemoveAssetDirectory(AssetDirectory directory, bool recursive = false)
+        {
+            RemoveAssetDirectory(directory.Info, recursive);
+        }
 
-        
+
+
 
         /*
         public bool TryGetAsset(string assetPath, out Asset? asset)
@@ -255,7 +259,7 @@ namespace FlemStudio.AssetManagement.Core
 
         public AssetInfo CreateAsset(string assetTypeName, string rootDirectoryName, string? parentDirectoryPath, string name, Action<AssetInfo>? createAssetContent = null)
         {
-            
+
 
             AssetTypeRegistry.TryGetAssetType(assetTypeName, out AssetTypeDefinition? assetType);
             if (assetType == null)
@@ -295,7 +299,7 @@ namespace FlemStudio.AssetManagement.Core
                 throw new Exception("Parent directory does not exist: " + containerInfo.AssetPath);
             }
             AssetInfo assetInfo = containerInfo.GetAssetInfo(name);
-            
+
             if (assetInfo.DefinitionFileExist)
             {
                 throw new Exception("Asset already exist: " + assetInfo.AssetPath);
@@ -319,14 +323,17 @@ namespace FlemStudio.AssetManagement.Core
                 Serializer.Serialize(writer, definitionFile);
             }
 
+
+
             if (createAssetContent != null)
             {
                 createAssetContent.Invoke(assetInfo);
-            } else
+            }
+            else
             {
                 assetType.AssetType.OnCreateAssetDefault(assetInfo);
             }
-            
+
             Console.WriteLine("Asset of type '" + assetType.Name + "', version '" + assetType.Version + "' created: " + assetInfo.AssetPath);
 
             return assetInfo;
@@ -424,6 +431,11 @@ namespace FlemStudio.AssetManagement.Core
 
         }
 
+        public void RemoveAsset(Asset asset)
+        {
+            RemoveAsset(asset.Info);
+        }
+
         internal static string FormatAssetPath(string path)
         {
             path = path.Replace('\\', '/');
@@ -434,6 +446,8 @@ namespace FlemStudio.AssetManagement.Core
             }
             return path;
         }
+
+        
 
         
     }

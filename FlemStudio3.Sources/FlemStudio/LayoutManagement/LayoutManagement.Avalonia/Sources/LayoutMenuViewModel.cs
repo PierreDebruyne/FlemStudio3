@@ -1,6 +1,5 @@
 ﻿using FlemStudio.LayoutManagement.Avalonia.Layouts;
 using ReactiveUI;
-using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace FlemStudio.LayoutManagement.Avalonia
@@ -108,17 +107,17 @@ namespace FlemStudio.LayoutManagement.Avalonia
 
         public void Init()
         {
-            
-            
+
+
         }
 
-        
 
-        
+
+
 
         public override void Dispose()
         {
-            
+
         }
 
         public override void Command()

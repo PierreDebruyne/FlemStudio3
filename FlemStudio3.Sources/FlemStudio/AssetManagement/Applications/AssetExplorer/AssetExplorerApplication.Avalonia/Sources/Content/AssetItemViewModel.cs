@@ -1,13 +1,9 @@
-﻿using FlemStudio.AssetManagement.Core.Assets;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FlemStudio.AssetManagement.Core.AssetDirectories;
+using FlemStudio.AssetManagement.Core.Assets;
 
 namespace FlemStudio.AssetExplorerApplication.Avalonia
 {
-    public class AssetItemViewModel : AssetContainerContentItemViewModel
+    public class AssetItemViewModel : AssetContainerContentItemContentViewModel
     {
         internal Asset Asset;
 
@@ -18,9 +14,27 @@ namespace FlemStudio.AssetExplorerApplication.Avalonia
 
         public string Name => Asset.Info.Name;
 
+        public Action<Asset>? OnOpen;
+        public Action<Asset>? OnRemove;
+
+        public override void Open()
+        {
+            OnOpen?.Invoke(Asset);
+        }
+
+        public override void Rename()
+        {
+
+        }
+        public override void Remove()
+        {
+            OnRemove?.Invoke(Asset);
+        }
         public override void Dispose()
         {
-            
+
         }
+
+        
     }
 }

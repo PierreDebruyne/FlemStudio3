@@ -1,5 +1,4 @@
 ﻿using FlemStudio.AssetManagement.CLI.Assets.Create;
-using FlemStudio.AssetManagement.Core;
 using FlemStudio.AssetManagement.Core.Assets;
 using System.CommandLine;
 using System.CommandLine.Invocation;
@@ -8,7 +7,7 @@ using TestExtension.Core;
 
 namespace TestExtension.CLI
 {
-    [CreateAssetCommandType(name: "Test", guid: "00000000-0000-0000-0000-000000000001", version:"0.0.1")]
+    [CreateAssetCommandType(name: "Test", guid: "00000000-0000-0000-0000-000000000001", version: "0.0.1")]
     public class CreateTestAssetCommand : ICreateAssetCommandType
     {
 
@@ -46,6 +45,6 @@ namespace TestExtension.CLI
             TestAssetType.OnCreateAsset(assetInfo, hello);
         }
 
-        
+
     }
 }

@@ -1,11 +1,4 @@
-﻿using FlemStudio.AssetManagement.Core.AssetDirectories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace FlemStudio.AssetManagement.Core
+﻿namespace FlemStudio.AssetManagement.Core
 {
     public class AssetPath
     {
@@ -27,12 +20,13 @@ namespace FlemStudio.AssetManagement.Core
             {
                 Root = null;
                 Path = pathItems[0];
-            } else
+            }
+            else
             {
                 Root = pathItems[0];
                 Path = pathItems[1];
             }
-            
+
         }
 
         internal string FormatAssetPath(string path)

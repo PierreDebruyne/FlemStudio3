@@ -1,10 +1,5 @@
 ﻿using FlemStudio.AssetManagement.Core;
-using System;
-using System.Collections.Generic;
 using System.CommandLine;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FlemStudio.AssetManagement.CLI.AssetDirectories
 {
@@ -12,7 +7,7 @@ namespace FlemStudio.AssetManagement.CLI.AssetDirectories
     {
         protected AssetManager AssetManager;
         public Command Command { get; }
-        
+
         protected CreateAssetDirectoryCommand CreateAssetDirectoryCommand;
         protected MoveAssetDirectoryCommand MoveAssetDirectoryCommand;
         protected RemoveAssetDirectoryCommand RemoveAssetDirectoryCommand;

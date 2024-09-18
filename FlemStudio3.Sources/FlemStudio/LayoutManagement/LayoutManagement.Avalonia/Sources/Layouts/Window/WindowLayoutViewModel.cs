@@ -1,10 +1,5 @@
 ﻿using FlemStudio.LayoutManagement.Core.Layouts;
 using ReactiveUI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FlemStudio.LayoutManagement.Avalonia.Layouts
 {
@@ -17,7 +12,7 @@ namespace FlemStudio.LayoutManagement.Avalonia.Layouts
         {
             this.RaisePropertyChanged(nameof(EditMode));
         }
-       
+
 
         public Guid ContentGuid => WindowLayoutUser.ContentLayout;
         public LayoutViewModel? ContentLayoutViewModel { get; protected set; }
@@ -31,7 +26,7 @@ namespace FlemStudio.LayoutManagement.Avalonia.Layouts
 
             if (ContentGuid != Guid.Empty)
             {
-                
+
                 ContentLayoutViewModel = LayoutViewModelService.CreateLayoutViewModel(WindowLayoutUser.ContentLayout);
                 ContentLayoutViewModel.NeedSimplify += OnNeedSimplify;
             }
@@ -43,7 +38,8 @@ namespace FlemStudio.LayoutManagement.Avalonia.Layouts
             if (newContentGuid == Guid.Empty)
             {
                 ContentLayoutViewModel = null;
-            } else
+            }
+            else
             {
                 ContentLayoutViewModel = LayoutViewModelService.CreateLayoutViewModel(newContentGuid);
                 ContentLayoutViewModel.NeedSimplify += OnNeedSimplify;

@@ -11,7 +11,7 @@ namespace FlemStudio.LayoutManagement.Core.Layouts
 
         public MainLayoutConfig()
         {
-            
+
         }
     }
     public class MainLayout

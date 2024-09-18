@@ -2,8 +2,6 @@
 using FlemStudio.Project.Core;
 using System.CommandLine;
 using System.CommandLine.Parsing;
-using System.Diagnostics;
-using System.Runtime.InteropServices;
 
 namespace FlemStudio.Project.CLI
 {
@@ -28,14 +26,14 @@ namespace FlemStudio.Project.CLI
             Project = project;
 
 
-            
+
 
 
             AssetTypeCommand = new AssetTypeCommand(Project.AssetManager);
-            
+
             AssetManagerCLI = new AssetManagerCLI(Project.AssetManager, project.ExtensionImporter);
 
-           
+
 
             UpdateTask = new Task(OnUpdate);
             UpdateTask.Start();
@@ -94,7 +92,7 @@ namespace FlemStudio.Project.CLI
                 DateTime now = DateTime.Now;
                 float deltaTime = (float)(now - lastUpdate).TotalSeconds;
                 Project.Update(deltaTime);
-               
+
 
                 lastUpdate = now;
                 Thread.Sleep(200);

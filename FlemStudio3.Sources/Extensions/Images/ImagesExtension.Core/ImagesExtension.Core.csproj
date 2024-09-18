@@ -25,11 +25,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="$(SolutionDir)/FlemStudio/Projects/Project.Core/Project.Core.csproj"/>
+		<ProjectReference Include="$(SolutionDir)/FlemStudio/Projects/Project.Core/Project.Core.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="SixLabors.ImageSharp" Version="3.1.5"/>
-		
+		<PackageReference Include="SixLabors.ImageSharp" Version="3.1.5" />
+		<ProjectReference Include="$(SolutionDir)/Libraries/Math/Math.csproj" />
 	</ItemGroup>
 
 </Project>

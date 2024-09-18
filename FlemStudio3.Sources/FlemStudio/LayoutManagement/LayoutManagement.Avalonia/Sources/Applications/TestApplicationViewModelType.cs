@@ -1,9 +1,4 @@
 ﻿using FlemStudio.LayoutManagement.Core.Applications;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FlemStudio.LayoutManagement.Avalonia.Applications
 {
@@ -15,7 +10,7 @@ namespace FlemStudio.LayoutManagement.Avalonia.Applications
 
         public override string Name => "Test Application";
 
-    
+
 
         public override TestApplicationViewModel DoCreateApplicationViewModel(TestApplicationUser user)
         {

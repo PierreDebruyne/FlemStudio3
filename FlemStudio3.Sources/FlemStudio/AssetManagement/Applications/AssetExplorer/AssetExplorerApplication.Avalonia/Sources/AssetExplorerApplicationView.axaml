@@ -22,8 +22,8 @@
 			<StackPanel Width="1" Background="{DynamicResource ThemeControlMidBrush}"></StackPanel>
 			<Button Height="32" Width="32" Content="{materialIcons:MaterialIconExt Kind=FilePlus}" Cursor="Hand" Command="{Binding AddAsset}"></Button>
 			<Button Height="32" Width="32" Content="{materialIcons:MaterialIconExt Kind=FolderAdd}" Cursor="Hand" Command="{Binding AddDirectory}"></Button>
-			<Button Height="32" Width="32" Content="{materialIcons:MaterialIconExt Kind=Rename}" Cursor="Hand"></Button>
-			<Button Height="32" Width="32" Content="{materialIcons:MaterialIconExt Kind=TrashCan}" Cursor="Hand"></Button>
+			<Button Height="32" Width="32" Content="{materialIcons:MaterialIconExt Kind=Rename}" Cursor="Hand" IsEnabled="{Binding CanRenameItem}" Command="{Binding RenameItem}"></Button>
+			<Button Height="32" Width="32" Content="{materialIcons:MaterialIconExt Kind=TrashCan}" Cursor="Hand" IsEnabled="{Binding CanRemoveItems}" Command="{Binding RemoveItems}"></Button>
 
 
 

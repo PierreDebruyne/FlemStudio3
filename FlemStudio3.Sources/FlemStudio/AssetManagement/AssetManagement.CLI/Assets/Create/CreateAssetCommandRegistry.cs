@@ -1,16 +1,6 @@
 ﻿using FlemStudio.AssetManagement.Core;
-using FlemStudio.AssetManagement.Core.Assets;
 using FlemStudio.ExtensionManagement.Core;
-using System;
-using System.Collections.Generic;
-using System.CommandLine;
 using System.ComponentModel.Composition;
-using System.ComponentModel.Composition.Hosting;
-using System.ComponentModel.Composition.Primitives;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FlemStudio.AssetManagement.CLI.Assets.Create
 {
@@ -24,7 +14,7 @@ namespace FlemStudio.AssetManagement.CLI.Assets.Create
 
         public ICreateAssetCommandType CreateAssetCommandType { get; }
 
-        
+
 
         public CreateAssetCommandTypeDefinition(string name, Guid guid, string version, ICreateAssetCommandType createAssetCommandType)
         {
@@ -33,10 +23,10 @@ namespace FlemStudio.AssetManagement.CLI.Assets.Create
             Version = version;
             CreateAssetCommandType = createAssetCommandType;
 
-            
+
         }
 
-        
+
     }
     public class CreateAssetCommandRegistry
     {
@@ -57,7 +47,7 @@ namespace FlemStudio.AssetManagement.CLI.Assets.Create
         {
             extensionImporter.CompositionContainer.ComposeParts(this);
 
-            
+
             foreach (var item in LoadedCommandTypes)
             {
                 try
@@ -72,7 +62,7 @@ namespace FlemStudio.AssetManagement.CLI.Assets.Create
                     Console.WriteLine(e.StackTrace);
                 }
             }
-            
+
         }
 
         public void TestExtensions()

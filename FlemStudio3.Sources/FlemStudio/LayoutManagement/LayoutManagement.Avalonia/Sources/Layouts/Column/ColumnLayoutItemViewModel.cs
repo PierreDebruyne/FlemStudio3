@@ -1,6 +1,4 @@
 ﻿using ReactiveUI;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace FlemStudio.LayoutManagement.Avalonia.Layouts
@@ -54,7 +52,7 @@ namespace FlemStudio.LayoutManagement.Avalonia.Layouts
                 }
 
             }
-            
+
             AddTopMenuViewModel = new MenuViewModel(ColumnLayoutViewModel.LayoutViewModelService.CreateContainerMenuItemViewModels());
             AddTopMenuViewModel.Submit = AddTopCommand;
             AddBottomMenuViewModel = new MenuViewModel(ColumnLayoutViewModel.LayoutViewModelService.CreateContainerMenuItemViewModels());
@@ -63,15 +61,15 @@ namespace FlemStudio.LayoutManagement.Avalonia.Layouts
             SplitLeftMenuViewModel.Submit = SplitLeftCommand;
             SplitRightMenuViewModel = new MenuViewModel(ColumnLayoutViewModel.LayoutViewModelService.CreateContainerMenuItemViewModels());
             SplitRightMenuViewModel.Submit = SplitRightCommand;
-            
+
         }
 
-        
+
         public MenuViewModel AddTopMenuViewModel { get; protected set; }
         public MenuViewModel AddBottomMenuViewModel { get; protected set; }
         public MenuViewModel SplitLeftMenuViewModel { get; protected set; }
         public MenuViewModel SplitRightMenuViewModel { get; protected set; }
-        
+
 
         public override void Dispose()
         {

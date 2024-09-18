@@ -1,6 +1,0 @@
-guid: 924dfc6c-323d-4d31-a6f6-5ab9ca68c891
-name: Test-cli
-version: 0.0.1
-dllPaths: [
-  C:\Users\Pierre\Desktop\FlemStudio\FlemStudio3\FlemStudio3.Sources\Extensions\Test\TestExtension.CLI\bin\Debug\net8.0\TestExtension.CLI.dll
-]

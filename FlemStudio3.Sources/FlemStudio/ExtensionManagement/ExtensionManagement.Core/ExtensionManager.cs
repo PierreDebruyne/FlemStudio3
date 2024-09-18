@@ -52,7 +52,7 @@ namespace FlemStudio.ExtensionManagement.Core
 
         public IEnumerable<IExtensionInfo> EnumerateExtensions()
         {
-            foreach (ExtensionRegistryEntry entry in ExtensionRegistry.EnumerateEntries()) 
+            foreach (ExtensionRegistryEntry entry in ExtensionRegistry.EnumerateEntries())
             {
                 using (TextReader reader = File.OpenText(ExtensionFolderPath + "/" + entry.Path + "/" + "Extension.yaml"))
                 {
@@ -101,7 +101,7 @@ namespace FlemStudio.ExtensionManagement.Core
         {
             foreach (ExtensionRegistryEntry entry in ExtensionRegistry.EnumerateEntries())
             {
-                
+
                 UpdateLocalExtension(entry.Path);
             }
         }

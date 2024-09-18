@@ -10,10 +10,10 @@ namespace FlemStudio.AssetManagement.Core
 
         protected Dictionary<string, RootAssetDirectory> RootAssetDirectoriesByName = new();
         public Action<RootAssetDirectory>? OnRootAssetDirectoryAdded;
-        
+
         protected Dictionary<string, IAssetContainer> AssetDirectoriesByPath = new();
         protected Dictionary<Guid, IAssetContainer> AssetDirectoriesByGuid = new();
-        
+
         protected Dictionary<string, Asset> AssetsByPath = new();
         protected Dictionary<Guid, Asset> AssetsByGuid = new();
 
@@ -29,7 +29,7 @@ namespace FlemStudio.AssetManagement.Core
             {
                 throw new Exception("Root asset directory path '" + rootAssetDirectory.Info.AssetPath + "' is already used.");
             }
-            
+
 
 
             if (AssetDirectoriesByPath.ContainsKey(rootAssetDirectory.Info.AssetPath))
@@ -68,7 +68,7 @@ namespace FlemStudio.AssetManagement.Core
                     }
                 }
             }
-            
+
 
 
             RootAssetDirectoriesByName.Add(rootAssetDirectory.Info.Name, rootAssetDirectory);
@@ -91,7 +91,7 @@ namespace FlemStudio.AssetManagement.Core
                 definition = AssetManager.Deserializer.Deserialize<AssetDirectoryDefinitionFile>(reader);
             }
             AssetDirectory assetDirectory = new AssetDirectory(assetDirectoryInfo, definition);
-           
+
             if (AssetDirectoriesByGuid.ContainsKey(assetDirectory.Definition.Guid))
             {
                 throw new Exception("Asset directory guid '" + assetDirectory.Definition.Guid + "' is already used.");
@@ -100,7 +100,8 @@ namespace FlemStudio.AssetManagement.Core
 
             IAssetContainerInfo? parentInfo = assetDirectoryInfo.GetParentInfo();
 
-            if (parentInfo != null && this.AssetDirectoriesByPath.TryGetValue(parentInfo.AssetPath, out IAssetContainer? parentContainer)) {
+            if (parentInfo != null && this.AssetDirectoriesByPath.TryGetValue(parentInfo.AssetPath, out IAssetContainer? parentContainer))
+            {
                 assetDirectory.ParentContainer = parentContainer;
             }
 
@@ -137,13 +138,13 @@ namespace FlemStudio.AssetManagement.Core
                     }
                 }
             }
-            
-            
+
+
             return assetDirectory;
 
         }
 
-        internal Asset RegisterAsset(IAssetInfo assetInfo)
+        internal Asset RegisterAsset(AssetInfo assetInfo)
         {
             if (AssetsByPath.ContainsKey(assetInfo.AssetPath))
             {
@@ -155,7 +156,7 @@ namespace FlemStudio.AssetManagement.Core
                 definition = AssetManager.Deserializer.Deserialize<AssetDefinitionFile>(reader);
             }
             Asset asset = new Asset(assetInfo, definition);
-            
+
             if (AssetsByGuid.ContainsKey(asset.Definition.Guid))
             {
                 throw new Exception("Asset guid '" + asset.Definition.Guid + "' is already used.");
@@ -247,7 +248,7 @@ namespace FlemStudio.AssetManagement.Core
                 UnregisterAsset(childAsset);
                 childAsset = directory.FirstAsset();
             }
-            
+
 
             directory.ParentContainer?.RemoveChild(directory);
             AssetDirectoriesByPath.Remove(directory.Info.AssetPath);
@@ -256,6 +257,6 @@ namespace FlemStudio.AssetManagement.Core
 
         }
 
-        
+
     }
 }

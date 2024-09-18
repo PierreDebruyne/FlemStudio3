@@ -1,11 +1,6 @@
 ﻿using FlemStudio.Applications.Avalonia;
 using FlemStudio.AssetManagement.Core;
 using ReactiveUI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FlemStudio.AssetManagement.Avalonia
 {
@@ -25,6 +20,7 @@ namespace FlemStudio.AssetManagement.Avalonia
             set
             {
                 this.RaiseAndSetIfChanged(ref _Name, value);
+                this.RaisePropertyChanged(nameof(CanSubmit));
             }
         }
 
@@ -49,7 +45,7 @@ namespace FlemStudio.AssetManagement.Avalonia
             set
             {
                 this.RaiseAndSetIfChanged(ref _SelectedAssetType, value);
-                
+
 
             }
         }

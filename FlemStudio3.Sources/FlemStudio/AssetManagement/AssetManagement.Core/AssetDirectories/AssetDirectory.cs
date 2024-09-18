@@ -4,7 +4,7 @@ namespace FlemStudio.AssetManagement.Core.AssetDirectories
 {
     public class AssetDirectory : IAssetContainer
     {
-        
+
         public AssetDirectoryInfo Info { get; }
         IAssetContainerInfo IAssetContainer.Info => Info;
         public IAssetDirectoryDefinition Definition { get; }

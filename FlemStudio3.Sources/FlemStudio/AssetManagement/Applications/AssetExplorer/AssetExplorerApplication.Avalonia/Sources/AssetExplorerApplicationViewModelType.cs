@@ -1,13 +1,6 @@
-﻿using FlemStudio.Applications.Avalonia;
-using FlemStudio.AssetExplorerApplication.Core;
+﻿using FlemStudio.AssetExplorerApplication.Core;
 using FlemStudio.AssetManagement.Avalonia;
 using FlemStudio.LayoutManagement.Avalonia.Applications;
-using FlemStudio.LayoutManagement.Core.Applications;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FlemStudio.AssetExplorerApplication.Avalonia
 {

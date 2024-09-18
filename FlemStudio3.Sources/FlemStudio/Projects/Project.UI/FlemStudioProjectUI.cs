@@ -72,7 +72,7 @@ namespace FlemStudio.Project.UI
                         {
                             columnLayoutUser0.AddItem(2, appLayoutUser2.LayoutGuid);
                         }
-                        
+
                         rowLayoutUser0.SetLayoutGuid(0, columnLayoutUser0.LayoutGuid);
                     }
                     using (ColumnLayoutUser columnLayoutUser1 = (ColumnLayoutUser)LayoutManager.LayoutService.UseNewLayout("Column"))
@@ -109,8 +109,8 @@ namespace FlemStudio.Project.UI
                     windowLayoutUser.ContentLayout = rowLayoutUser0.LayoutGuid;
                 }
 
-                
-                
+
+
 
                 MainLayoutUser.AddWindow(windowLayoutUser);
             }

@@ -2,15 +2,13 @@
 using FlemStudio.AssetManagement.CLI.Assets;
 using FlemStudio.AssetManagement.Core;
 using FlemStudio.ExtensionManagement.Core;
-using System.CommandLine;
-using System.ComponentModel.Composition;
 
 namespace FlemStudio.AssetManagement.CLI
 {
     public class AssetManagerCLI
     {
         protected AssetManager AssetManager;
-        
+
 
         public AssetsCLI AssetsCLI { get; }
         public AssetDirectoriesCLI AssetDirectoryCLI { get; }
@@ -23,11 +21,11 @@ namespace FlemStudio.AssetManagement.CLI
             AssetDirectoryCLI = new AssetDirectoriesCLI(assetManager);
         }
 
-       
+
 
 
     }
 
 
-  
+
 }

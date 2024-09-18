@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using YamlDotNet.Serialization;
 using YamlDotNet.Serialization.NamingConventions;
 
@@ -23,7 +18,7 @@ namespace FlemStudio.LayoutManagement.Core.Applications
     {
         public TestApplication(TestApplicationState state) : base(state)
         {
-            
+
         }
 
         public Action<string, string>? OnInputUpdated { get; set; }
@@ -47,7 +42,7 @@ namespace FlemStudio.LayoutManagement.Core.Applications
 
         public override void Dispose()
         {
-            
+
         }
     }
 
@@ -70,10 +65,10 @@ namespace FlemStudio.LayoutManagement.Core.Applications
             OnInputUpdated?.Invoke(oldValue, newValue);
         }
         public Action<string, string>? OnInputUpdated { get; set; }
-        public string Input 
-        { 
-            get => Application.Input; 
-            set => Application.Input = value; 
+        public string Input
+        {
+            get => Application.Input;
+            set => Application.Input = value;
         }
     }
 
@@ -83,7 +78,7 @@ namespace FlemStudio.LayoutManagement.Core.Applications
         protected ISerializer Serializer;
         protected IDeserializer Deserializer;
 
-        public TestApplicationType() : base ("TestApplication")
+        public TestApplicationType() : base("TestApplication")
         {
             Serializer = new SerializerBuilder().WithNamingConvention(CamelCaseNamingConvention.Instance).Build();
             Deserializer = new DeserializerBuilder().WithNamingConvention(CamelCaseNamingConvention.Instance).Build();

@@ -1,7 +1,6 @@
 ﻿
 using FlemStudio.LayoutManagement.Avalonia.Applications;
 using ReactiveUI;
-using System;
 
 namespace FlemStudio.LayoutManagement.Avalonia.Layouts
 {

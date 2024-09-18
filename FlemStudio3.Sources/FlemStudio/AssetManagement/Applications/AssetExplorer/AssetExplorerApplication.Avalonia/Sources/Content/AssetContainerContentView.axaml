@@ -12,15 +12,16 @@
 
 	<ScrollViewer Background="{DynamicResource ThemeControlMidBrush}">
 
-			<ItemsControl ItemsSource="{Binding Items}">
+			<ItemsControl ItemsSource="{Binding Items}" Name="ItemsControl">
 				<ItemsControl.ItemsPanel>
 					<ItemsPanelTemplate>
-						<WrapPanel />
+						<WrapPanel Background="Transparent"/>
+
 					</ItemsPanelTemplate>
 				</ItemsControl.ItemsPanel>
 				<ItemsControl.ItemTemplate>
 					<DataTemplate>
-						<ContentControl Content="{Binding}"></ContentControl>
+						<views:AssetContainerContentItemView Content="{Binding}"></views:AssetContainerContentItemView>
 					</DataTemplate>
 				</ItemsControl.ItemTemplate>
 			</ItemsControl>

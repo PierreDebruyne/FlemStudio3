@@ -1,5 +1,6 @@
 ﻿namespace FlemStudio.AssetManagement.Core
 {
+    /*
     public interface IAssetInfo
     {
         public string Path { get; }
@@ -12,4 +13,5 @@
         public IAssetContainerInfo GetParentInfo();
 
     }
+    */
 }

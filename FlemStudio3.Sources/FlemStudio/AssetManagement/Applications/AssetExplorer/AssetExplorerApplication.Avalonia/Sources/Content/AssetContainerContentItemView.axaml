@@ -1,0 +1,34 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 x:Class="FlemStudio.AssetExplorerApplication.Avalonia.AssetContainerContentItemView"
+			 
+			 >
+
+
+
+	<UserControl.Styles>
+		<Style Selector="Border#Container">
+			<Setter Property="Background" Value="Transparent"></Setter>
+			<Setter Property="BorderBrush" Value="Transparent"></Setter>
+		</Style>
+		<Style Selector="Border#Container.selected">
+			<Setter Property="Background" Value="{DynamicResource ThemeControlHighlightMidBrush}"/>
+			<Setter Property="BorderBrush" Value="{DynamicResource ThemeBorderMidBrush}"/>
+		</Style>
+	</UserControl.Styles>
+
+
+	<Border BorderThickness="1" Name="Container" Margin="2" Classes.selected="{Binding IsSelected }" Cursor="Hand" Width="75" Height="85" ZIndex="0">
+		<Border.ContextMenu>
+			<ContextMenu>
+				<MenuItem Header="Open" Command="{Binding Open}"/>
+				<MenuItem Header="Rename" Command="{Binding Rename}"/>
+				<MenuItem Header="Remove" Command="{Binding Remove}"/>
+			</ContextMenu>
+		</Border.ContextMenu>
+		<ContentControl Content="{Binding Content}"></ContentControl>
+	</Border>
+</UserControl>

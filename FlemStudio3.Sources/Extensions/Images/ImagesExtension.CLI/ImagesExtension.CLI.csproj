@@ -7,14 +7,18 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="$(SolutionDir)/FlemStudio/Projects/Project.CLI/Project.CLI.csproj">
+		<ProjectReference Include="$(SolutionDir)/FlemStudio/AssetManagement/AssetManagement.CLI/AssetManagement.CLI.csproj">
 
 			<PrivateAssets>all</PrivateAssets>
 		</ProjectReference>
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="$(SolutionDir)/Extensions/Images/ImagesExtension.Core/ImagesExtension.Core.csproj"/>
+		<ProjectReference Include="$(SolutionDir)/Extensions/Images/ImagesExtension.Core/ImagesExtension.Core.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Sources\AssetTypes\Images\" />
 	</ItemGroup>
 
 </Project>

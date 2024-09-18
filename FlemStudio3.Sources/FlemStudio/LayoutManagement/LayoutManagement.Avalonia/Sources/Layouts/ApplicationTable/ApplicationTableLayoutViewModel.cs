@@ -2,7 +2,6 @@
 using FlemStudio.LayoutManagement.Avalonia.Applications;
 using FlemStudio.LayoutManagement.Core.Applications;
 using ReactiveUI;
-using System;
 using System.Collections.ObjectModel;
 
 namespace FlemStudio.LayoutManagement.Avalonia.Layouts
@@ -16,7 +15,7 @@ namespace FlemStudio.LayoutManagement.Avalonia.Layouts
         protected ApplicationTableLayoutViewModelType LayoutViewModelType;
         internal ApplicationFeatures ApplicationFeatures => LayoutViewModelType.ApplicationFeatures;
 
-        public ApplicationTableLayoutViewModel(LayoutViewModelService layoutViewModelService, ApplicationTableLayoutViewModelType layoutViewModelType, ApplicationTableLayoutUser tabLayout) : base (layoutViewModelService, layoutViewModelType)
+        public ApplicationTableLayoutViewModel(LayoutViewModelService layoutViewModelService, ApplicationTableLayoutViewModelType layoutViewModelType, ApplicationTableLayoutUser tabLayout) : base(layoutViewModelService, layoutViewModelType)
         {
             LayoutViewModelType = layoutViewModelType;
             TabLayout = tabLayout;

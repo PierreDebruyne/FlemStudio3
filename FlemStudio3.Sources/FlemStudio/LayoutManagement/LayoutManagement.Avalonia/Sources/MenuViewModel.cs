@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace FlemStudio.LayoutManagement.Avalonia
+﻿namespace FlemStudio.LayoutManagement.Avalonia
 {
     public class MenuViewModel
     {

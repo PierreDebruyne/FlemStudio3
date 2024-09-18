@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace FlemStudio.Applications.Avalonia
+﻿namespace FlemStudio.Applications.Avalonia
 {
     public abstract class DialogViewModel : ViewModelBase
     {
@@ -16,7 +14,7 @@ namespace FlemStudio.Applications.Avalonia
         public Action? OnCancel = null;
     }
 
-    
+
 
 
 }

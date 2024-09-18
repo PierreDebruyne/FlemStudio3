@@ -1,8 +1,6 @@
 ﻿
 using FlemStudio.LayoutManagement.Core.Applications;
 using ReactiveUI;
-using System;
-using System.Collections.Generic;
 
 namespace FlemStudio.LayoutManagement.Avalonia.Applications
 {
@@ -122,7 +120,7 @@ namespace FlemStudio.LayoutManagement.Avalonia.Applications
         }
     }
 
-    public abstract class ApplicationViewModelType<TApplicationType, TApplicationViewModel, TApplicationUser> : ApplicationViewModelType 
+    public abstract class ApplicationViewModelType<TApplicationType, TApplicationViewModel, TApplicationUser> : ApplicationViewModelType
         where TApplicationType : ApplicationType
         where TApplicationViewModel : ApplicationViewModel
         where TApplicationUser : ApplicationUser

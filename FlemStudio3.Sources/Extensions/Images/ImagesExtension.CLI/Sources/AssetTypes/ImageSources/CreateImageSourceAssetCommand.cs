@@ -1,5 +1,4 @@
 ﻿using FlemStudio.AssetManagement.CLI.Assets.Create;
-using FlemStudio.AssetManagement.Core;
 using FlemStudio.AssetManagement.Core.Assets;
 using ImagesExtension.Core;
 using System.CommandLine;
@@ -45,12 +44,13 @@ namespace ImagesExtension.CLI
             if (imagePath == null)
             {
                 ImageSourceAssetType.OnCreateAssetDefault(assetInfo);
-            } else
+            }
+            else
             {
                 ImageSourceAssetType.OnCreateAsset(assetInfo, imagePath);
             }
         }
 
-        
+
     }
 }

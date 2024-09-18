@@ -3,10 +3,7 @@ using FlemStudio.AssetManagement.Core;
 using FlemStudio.AssetManagement.Core.AssetDirectories;
 using FlemStudio.AssetManagement.Core.RootAssetDirectories;
 using ReactiveUI;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 
 namespace FlemStudio.AssetExplorerApplication.Avalonia
 {
@@ -30,7 +27,7 @@ namespace FlemStudio.AssetExplorerApplication.Avalonia
 
         public void Dispose()
         {
-            
+
         }
 
         public string Name => AssetContainer.Info.Name;
@@ -63,7 +60,7 @@ namespace FlemStudio.AssetExplorerApplication.Avalonia
 
         private void OnNavigation(IAssetContainer container)
         {
-            if  (ApplicationUser.CurrentAssetContainer == null || ApplicationUser.CurrentAssetContainer != container)
+            if (ApplicationUser.CurrentAssetContainer == null || ApplicationUser.CurrentAssetContainer != container)
             {
                 ApplicationUser.CurrentAssetPath = container.Info.AssetPath;
             }
@@ -80,7 +77,7 @@ namespace FlemStudio.AssetExplorerApplication.Avalonia
             UpdatePathList();
         }
 
-       
+
 
 
 
@@ -93,7 +90,8 @@ namespace FlemStudio.AssetExplorerApplication.Avalonia
             PathList.Clear();
 
             IAssetContainer? container = CurrentAssetContainer;
-            while (container != null && container is AssetDirectory) {
+            while (container != null && container is AssetDirectory)
+            {
 
 
                 PathList.Insert(0, new AssetBreadCrumbItemViewModel(this, container));
@@ -104,8 +102,8 @@ namespace FlemStudio.AssetExplorerApplication.Avalonia
                 RootAssetDirectoryListViewModel.SetSelected((RootAssetDirectory)container);
             }
 
-            
-            
+
+
         }
 
         internal void OnItemClick(IAssetContainer assetContainer)
@@ -121,7 +119,7 @@ namespace FlemStudio.AssetExplorerApplication.Avalonia
             }
             PathList.Clear();
             ApplicationUser.OnCurrentAssetPathUpdated -= OnCurrentAssetPathUpdated;
-            
+
         }
     }
 }

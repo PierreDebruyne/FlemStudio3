@@ -1,6 +1,4 @@
 ﻿using ReactiveUI;
-using System;
-using System.Collections.Generic;
 
 namespace FlemStudio.LayoutManagement.Avalonia.Applications
 {

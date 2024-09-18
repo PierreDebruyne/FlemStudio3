@@ -41,7 +41,7 @@ namespace FlemStudio.LayoutManagement.Core.Applications
             }
             else
             {
-                
+
                 Save();
             }
         }
@@ -88,7 +88,7 @@ namespace FlemStudio.LayoutManagement.Core.Applications
             }
         }
 
-        
+
         public void AddApplication(Guid guid, string type, string? tag)
         {
             ApplicationRegistryItem entry = new ApplicationRegistryItem()
@@ -104,7 +104,7 @@ namespace FlemStudio.LayoutManagement.Core.Applications
             }
             OnUpdated();
         }
-        
+
 
         public void RemoveApplication(Guid guid)
         {

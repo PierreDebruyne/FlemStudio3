@@ -1,5 +1,4 @@
-﻿using Avalonia.Controls;
-using FlemStudio.Applications.Avalonia;
+﻿using FlemStudio.Applications.Avalonia;
 
 namespace FlemStudio.Project.Avalonia.Sources;
 

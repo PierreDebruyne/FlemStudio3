@@ -1,16 +1,11 @@
-﻿using FlemStudio.AssetManagement.Core.Assets;
-using FlemStudio.AssetManagement.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using YamlDotNet.Serialization.NamingConventions;
-using YamlDotNet.Serialization;
+﻿using FlemStudio.AssetManagement.Core;
+using FlemStudio.AssetManagement.Core.Assets;
 using ImagesExtension.Core.Properties;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using System.ComponentModel.Composition;
+using YamlDotNet.Serialization;
+using YamlDotNet.Serialization.NamingConventions;
 
 namespace ImagesExtension.Core
 {
@@ -32,7 +27,6 @@ namespace ImagesExtension.Core
 
         public void Test()
         {
-
             Console.WriteLine("YO! I'am the image source asset type.");
             Image<Rgba32> image = Image.Load<Rgba32>(Resources.grid);
             image.Dispose();
@@ -57,13 +51,8 @@ namespace ImagesExtension.Core
 
         public void OnCreateAsset(AssetInfo assetInfo, string imagePath)
         {
+
             FileInfo imageFileInfo = new FileInfo(imagePath);
-            if (imageFileInfo.Exists == false)
-            {
-                throw new Exception("Image not found: " + imagePath);
-            }
-            Image<Rgba32> image = Image.Load<Rgba32>(imagePath);
-            image.Save(assetInfo.FullPath + "/" + imageFileInfo.Name);
 
             ImageSourceAssetConfigFile configFile = new ImageSourceAssetConfigFile()
             {
@@ -74,6 +63,14 @@ namespace ImagesExtension.Core
             {
                 Serializer.Serialize(writer, configFile);
             }
+
+
+            if (imageFileInfo.Exists == false)
+            {
+                throw new Exception("Image not found: " + imagePath);
+            }
+            Image<Rgba32> image = Image.Load<Rgba32>(imagePath);
+            image.Save(assetInfo.FullPath + "/" + imageFileInfo.Name);
         }
 
         public void OnMoveAsset(AssetInfo assetInfo)

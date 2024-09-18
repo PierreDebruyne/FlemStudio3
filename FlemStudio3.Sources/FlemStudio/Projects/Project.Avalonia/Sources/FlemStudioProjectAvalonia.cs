@@ -7,10 +7,6 @@ using FlemStudio.LayoutManagement.Avalonia.Layouts;
 using FlemStudio.Project.Avalonia.Sources;
 using FlemStudio.Project.UI;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FlemStudio.Project.Avalonia
 {
@@ -25,12 +21,12 @@ namespace FlemStudio.Project.Avalonia
         {
             ProjectUI = projectUI;
             LayoutManagerAvalonia = new LayoutManagerAvalonia(projectUI.LayoutManager);
-            AssetManagerAvalonia = new AssetManagerAvalonia(this, projectUI.CoreProject.AssetManager);
+            AssetManagerAvalonia = new AssetManagerAvalonia(this, projectUI.CoreProject.AssetManager, projectUI.CoreProject.ExtensionImporter);
 
 
             LayoutManagerAvalonia.ApplicationFeatures.AddApplicationType(new AssetExplorerApplicationViewModelType(projectUI.LayoutManager.ApplicationService.GetApplicationType<AssetExplorerApplicationType>(), AssetManagerAvalonia));
 
-            
+
         }
 
         public void Init()
@@ -51,6 +47,6 @@ namespace FlemStudio.Project.Avalonia
             }
         }
 
-        
+
     }
 }

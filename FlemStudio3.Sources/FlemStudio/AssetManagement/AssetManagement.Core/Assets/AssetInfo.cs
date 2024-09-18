@@ -2,7 +2,7 @@
 
 namespace FlemStudio.AssetManagement.Core.Assets
 {
-    public class AssetInfo : IAssetInfo
+    public class AssetInfo
     {
         protected RootAssetDirectoryInfo RootAssetDirectoryInfo;
         public string Path { get; }
@@ -25,7 +25,7 @@ namespace FlemStudio.AssetManagement.Core.Assets
 
         public IAssetContainerInfo GetParentInfo()
         {
-            
+
             string parentPath = string.Join("/", Path.Split("/").SkipLast(1));
             if (parentPath.Length == 0)
             {

@@ -1,14 +1,7 @@
-﻿using FlemStudio.AssetManagement.CLI.Assets.Create;
-using FlemStudio.AssetManagement.Core;
+﻿using FlemStudio.AssetManagement.Core;
 using FlemStudio.AssetManagement.Core.Assets;
 using FlemStudio.ExtensionManagement.Core;
-using System;
-using System.Collections.Generic;
 using System.CommandLine;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace FlemStudio.AssetManagement.CLI.Assets.Create
 {
@@ -66,7 +59,8 @@ namespace FlemStudio.AssetManagement.CLI.Assets.Create
                         if (CommandAssetTypeDefinition != null)
                         {
                             CommandAssetTypeDefinition.CreateAssetCommandType.OnCreateAsset(assetInfo, context);
-                        } else
+                        }
+                        else
                         {
                             AssetTypeDefinition.AssetType.OnCreateAssetDefault(assetInfo);
                         }
@@ -106,7 +100,7 @@ namespace FlemStudio.AssetManagement.CLI.Assets.Create
                 Command.AddCommand(createAssetCommand.Command);
             }
 
-            
+
             /*
             
 

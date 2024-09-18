@@ -1,9 +1,5 @@
 ﻿using FlemStudio.ExtensionManagement.Core;
 using System.ComponentModel.Composition;
-using System.ComponentModel.Composition.Hosting;
-using System.ComponentModel.Composition.Primitives;
-using System.Linq;
-using System.Reflection;
 
 namespace FlemStudio.AssetManagement.Core
 {
@@ -48,7 +44,8 @@ namespace FlemStudio.AssetManagement.Core
                 try
                 {
                     RegisterAssetType(item.Metadata, item.Value);
-                } catch (Exception e)
+                }
+                catch (Exception e)
                 {
                     Console.WriteLine("Impossible to load asset type:");
                     Console.WriteLine(e.Message);
@@ -74,7 +71,7 @@ namespace FlemStudio.AssetManagement.Core
             {
                 throw new Exception("Asset manager already have an asset type with guid: " + guid);
             }
-            
+
             if (AssetTypesByName.ContainsKey(identity.Name))
             {
                 throw new Exception("Asset manager already have an asset type with name: " + identity.Name);
@@ -89,12 +86,12 @@ namespace FlemStudio.AssetManagement.Core
             return AssetTypesByGuid.TryGetValue(guid, out assetType);
         }
 
-        
+
         public bool TryGetAssetType(string name, out AssetTypeDefinition? assetType)
         {
             return AssetTypesByName.TryGetValue(name, out assetType);
         }
-        
+
 
         public IEnumerable<AssetTypeDefinition> EnumerateAssetTypes()
         {

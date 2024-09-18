@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using YamlDotNet.Serialization.NamingConventions;
-using YamlDotNet.Serialization;
-using System.ComponentModel.Composition.Hosting;
+﻿using System.ComponentModel.Composition.Hosting;
 using System.ComponentModel.Composition.Primitives;
+using YamlDotNet.Serialization;
+using YamlDotNet.Serialization.NamingConventions;
 
 namespace FlemStudio.ExtensionManagement.Core
 {
     public class ExtensionImporter
     {
         public string ExtensionFolderPath { get; }
-
         public string ExtensionRegistryFileName { get; } = "ExtensionRegistry.yaml";
         public string ExtensionRegistryFilePath => ExtensionFolderPath + "/" + ExtensionRegistryFileName;
 
@@ -23,47 +17,44 @@ namespace FlemStudio.ExtensionManagement.Core
 
         protected ComposablePartCatalog Catalog;
         public CompositionContainer CompositionContainer { get; }
-        public ExtensionImporter(string extensionFolderPath, IList<Guid> extensionGuids, IList<string> contexts)
+        public ExtensionImporter(string extensionFolderPath, IList<string> extensionNames, IList<string> contexts)
         {
             ExtensionFolderPath = extensionFolderPath;
             if (Directory.Exists(ExtensionFolderPath) == false)
             {
                 throw new Exception("Extension directory does not exist: " + ExtensionFolderPath);
             }
-
-
             if (File.Exists(ExtensionRegistryFilePath) == false)
             {
                 throw new Exception("Extension registry file does not exist: " + ExtensionRegistryFilePath);
-
             }
             ExtensionRegistry = ExtensionRegistry.ReadFile(ExtensionRegistryFilePath);
 
             Serializer = new SerializerBuilder().WithNamingConvention(CamelCaseNamingConvention.Instance).Build();
             Deserializer = new DeserializerBuilder().WithNamingConvention(CamelCaseNamingConvention.Instance).Build();
 
-
             AggregateCatalog aggregateCatalog = new AggregateCatalog();
 
-            foreach (ExtensionRegistryEntry entry in ExtensionRegistry.EnumerateEntries())
+            foreach (string extensionName in extensionNames)
             {
-                if (contexts.Contains(entry.Context))
+                foreach (string context in contexts)
                 {
-                    aggregateCatalog.Catalogs.Add(new DirectoryCatalog(ExtensionFolderPath + "/" + entry.Path));
-                    Console.WriteLine(ExtensionFolderPath + "/" + entry.Path);
+                    ExtensionRegistry.TryGetEntry(extensionName + "." + context, out ExtensionRegistryEntry? entry);
+                    if (entry != null)
+                    {
+                        aggregateCatalog.Catalogs.Add(new DirectoryCatalog(ExtensionFolderPath + "/" + entry.Path));
+                    }
                 }
-                
-                
             }
 
             Catalog = new FilteredCatalog(aggregateCatalog,
-                def => {
-
+                def =>
+                {
                     try
                     {
                         if (def.ExportDefinitions.First().Metadata.ContainsKey("Guid")
-                            && extensionGuids.Contains(Guid.Parse((string)def.ExportDefinitions.First().Metadata["Guid"]))
-                            )
+                        && def.ExportDefinitions.First().Metadata.ContainsKey("Name")
+                        && def.ExportDefinitions.First().Metadata.ContainsKey("Version"))
                         {
                             return true;
                         }
@@ -73,11 +64,9 @@ namespace FlemStudio.ExtensionManagement.Core
                         Console.WriteLine(e.Message);
                         Console.WriteLine(e.StackTrace);
                     }
-
                     return false;
                 });
             CompositionContainer = new CompositionContainer(Catalog);
-
         }
 
         public IEnumerable<IExtensionInfo> EnumerateExtensions()

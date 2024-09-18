@@ -23,7 +23,7 @@ namespace FlemStudio.AssetManagement.Core
             FileSystemWatcher = new FileSystemWatcher(RootAssetDirectory.Info.FullPath);
 
             FileSystemWatcher.NotifyFilter = NotifyFilters.FileName | NotifyFilters.LastWrite | NotifyFilters.DirectoryName;
-                //NotifyFilters.Attributes
+            //NotifyFilters.Attributes
             //                     | NotifyFilters.CreationTime
             //                     | NotifyFilters.DirectoryName
             //                     | NotifyFilters.FileName
@@ -45,7 +45,7 @@ namespace FlemStudio.AssetManagement.Core
             //Console.WriteLine(FileSystemWatcher.Filter);
 
             FileSystemWatcher.IncludeSubdirectories = true;
-            
+
             FileSystemWatcher.EnableRaisingEvents = true;
 
         }
@@ -96,12 +96,12 @@ namespace FlemStudio.AssetManagement.Core
         {
 
             OnUpdate();
-            
+
             Console.WriteLine("File changed: " + e.Name);
 
         }
 
-        
+
         private void OnCreatedEvent(object sender, FileSystemEventArgs e)
         {
             OnUpdate();
@@ -111,9 +111,9 @@ namespace FlemStudio.AssetManagement.Core
                 FilesCreated.Add(e.Name);
             }
 
-            
+
         }
-        
+
         private void OnDeletedEvent(object sender, FileSystemEventArgs e)
         {
             OnUpdate();

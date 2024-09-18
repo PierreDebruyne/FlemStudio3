@@ -1,11 +1,4 @@
-﻿using Avalonia.Controls;
-using Avalonia.Input;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 
 namespace FlemStudio.Applications.Avalonia
 {
@@ -40,7 +33,7 @@ namespace FlemStudio.Applications.Avalonia
 
         public async Task OpenDialog<T>(T viewModel, Action submit) where T : DialogViewModel
         {
-            
+
             if (FocusedWindow != null)
             {
                 var dialog = new DialogWindow()
@@ -57,9 +50,9 @@ namespace FlemStudio.Applications.Avalonia
                     dialog.Close(null);
                 };
                 await dialog.ShowDialog<T>(FocusedWindow);
-                
+
             }
-            
+
         }
 
         public async Task OpenErrorDialog<T>(T viewModel) where T : ErrorDialogViewModel
@@ -73,7 +66,7 @@ namespace FlemStudio.Applications.Avalonia
                 viewModel.OnOK += () =>
                 {
                     dialog.Close(null);
-                    
+
                 };
                 await dialog.ShowDialog<T>(FocusedWindow);
             }

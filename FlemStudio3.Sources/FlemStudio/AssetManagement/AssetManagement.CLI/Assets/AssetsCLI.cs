@@ -1,12 +1,7 @@
 ﻿using FlemStudio.AssetManagement.CLI.Assets.Create;
 using FlemStudio.AssetManagement.Core;
 using FlemStudio.ExtensionManagement.Core;
-using System;
-using System.Collections.Generic;
 using System.CommandLine;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FlemStudio.AssetManagement.CLI.Assets
 {

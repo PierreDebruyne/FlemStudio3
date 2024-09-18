@@ -1,7 +1,5 @@
 ﻿
 using ReactiveUI;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace FlemStudio.LayoutManagement.Avalonia.Layouts

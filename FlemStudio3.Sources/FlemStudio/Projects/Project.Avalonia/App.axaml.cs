@@ -1,16 +1,12 @@
 ﻿using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using FlemStudio.Project.Avalonia.Sources;
 using FlemStudio.Project.Core;
 using FlemStudio.Project.UI;
 using System;
 using System.Diagnostics;
-using System.Threading.Tasks;
 using System.Threading;
-using System.Collections.Generic;
-using FlemStudio.LayoutManagement.Core.Layouts;
-using FlemStudio.LayoutManagement.Avalonia.Layouts;
+using System.Threading.Tasks;
 
 
 
@@ -23,7 +19,7 @@ public partial class App : Application
     protected FlemStudioProject Project;
     protected FlemStudioProjectUI ProjectUI;
     protected FlemStudioProjectAvalonia ProjectAvalonia;
-    
+
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
@@ -31,7 +27,7 @@ public partial class App : Application
 
     public override void OnFrameworkInitializationCompleted()
     {
-        
+
 
 
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
@@ -51,7 +47,7 @@ public partial class App : Application
             ProjectAvalonia.Init();
 
             desktop.MainWindow = ProjectAvalonia.MainWindow;
-            
+
         }
         /*
         else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)

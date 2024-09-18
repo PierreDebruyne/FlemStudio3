@@ -1,12 +1,8 @@
 ﻿using FlemStudio.Applications.Avalonia;
 using FlemStudio.AssetManagement.Core;
-using ReactiveUI;
-using System;
-using System.Collections.Generic;
+using FlemStudio.AssetManagement.Core.Assets;
+using FlemStudio.ExtensionManagement.Core;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FlemStudio.AssetManagement.Avalonia
 {
@@ -14,11 +10,16 @@ namespace FlemStudio.AssetManagement.Avalonia
     {
         protected AvaloniaApplication AvaloniaApplication;
         protected AssetManager AssetManager;
+        protected CreateAssetDialogRegistry CreateAssetDialogRegistry;
 
-        public AssetManagerAvalonia(AvaloniaApplication avaloniaApplication, AssetManager assetManager)
+        public AssetManagerAvalonia(AvaloniaApplication avaloniaApplication, AssetManager assetManager, ExtensionImporter extensionImporter)
         {
             AvaloniaApplication = avaloniaApplication;
             AssetManager = assetManager;
+
+            CreateAssetDialogRegistry = new CreateAssetDialogRegistry(assetManager);
+            CreateAssetDialogRegistry.LoadExtensions(extensionImporter);
+            CreateAssetDialogRegistry.TestExtensions();
         }
 
         public async void OpenCreateAssetDirectoryDialog(IAssetContainer parentContainer)
@@ -30,6 +31,7 @@ namespace FlemStudio.AssetManagement.Avalonia
             {
                 try
                 {
+
                     AssetManager.CreateAssetDirectory(parentContainer.Info, createAssetDirectoryDialogViewModel.Name);
                 }
                 catch (Exception ex)
@@ -52,7 +54,39 @@ namespace FlemStudio.AssetManagement.Avalonia
             {
                 try
                 {
-                    AssetManager.CreateAsset(createAssetDialogViewModel.SelectedAssetType, parentContainer.Info, createAssetDialogViewModel.Name);
+                    CreateAssetDialogRegistry.TryGetCreateAssetDialogType(createAssetDialogViewModel.SelectedAssetType.Guid, out CreateAssetDialogTypeDefinition? createAssetDialogType);
+
+                    if (createAssetDialogType == null)
+                    {
+                        AssetManager.CreateAsset(createAssetDialogViewModel.SelectedAssetType, parentContainer.Info, createAssetDialogViewModel.Name);
+                    }
+                    else
+                    {
+                        DialogViewModel createTypeDialogViewModel = createAssetDialogType.CreateAssetDialogType.CreateDialogViewModel();
+                        await AvaloniaApplication.OpenDialog(createTypeDialogViewModel, async () =>
+                        {
+                            try
+                            {
+                                AssetManager.CreateAsset(createAssetDialogViewModel.SelectedAssetType, parentContainer.Info, createAssetDialogViewModel.Name, (AssetInfo assetInfo) =>
+                                {
+                                    createAssetDialogType.CreateAssetDialogType.OnCreateAsset(assetInfo, createTypeDialogViewModel);
+                                });
+                            }
+                            catch (Exception ex)
+                            {
+                                Debug.WriteLine($"Message: {ex.Message}");
+                                Debug.WriteLine("Stacktrace:");
+                                Debug.WriteLine(ex.StackTrace);
+                                Debug.WriteLine("");
+
+                                await AvaloniaApplication.OpenErrorDialog(new ErrorDialogViewModel(ex));
+                            }
+
+
+                        });
+                    }
+
+
                 }
                 catch (Exception ex)
                 {

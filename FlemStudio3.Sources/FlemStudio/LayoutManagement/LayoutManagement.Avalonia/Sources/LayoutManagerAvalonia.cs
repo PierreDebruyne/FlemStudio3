@@ -2,12 +2,6 @@
 using FlemStudio.LayoutManagement.Avalonia.Layouts;
 using FlemStudio.LayoutManagement.Core;
 using FlemStudio.LayoutManagement.Core.Applications;
-using FlemStudio.LayoutManagement.Core.Layouts;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FlemStudio.LayoutManagement.Avalonia
 {

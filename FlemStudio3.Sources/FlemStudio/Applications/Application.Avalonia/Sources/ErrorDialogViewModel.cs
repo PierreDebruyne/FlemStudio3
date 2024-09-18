@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace FlemStudio.Applications.Avalonia
+﻿namespace FlemStudio.Applications.Avalonia
 {
     public class ErrorDialogViewModel : ViewModelBase
     {

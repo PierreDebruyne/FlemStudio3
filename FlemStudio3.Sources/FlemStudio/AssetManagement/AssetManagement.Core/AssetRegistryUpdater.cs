@@ -1,11 +1,6 @@
 ﻿using FlemStudio.AssetManagement.Core.AssetDirectories;
 using FlemStudio.AssetManagement.Core.Assets;
 using FlemStudio.AssetManagement.Core.RootAssetDirectories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FlemStudio.AssetManagement.Core
 {
@@ -47,7 +42,7 @@ namespace FlemStudio.AssetManagement.Core
             watcher.OnFileDeleted += OnFileDeleted;
         }
 
-        
+
 
         private void OnFileCreated(RootAssetDirectory rootDirectory, string path)
         {
@@ -58,7 +53,8 @@ namespace FlemStudio.AssetManagement.Core
             {
                 AssetDirectoryInfo info = rootDirectory.Info.GetAssetDirectoryInfo(string.Join("/", path.Split("/").SkipLast(1)));
                 AssetRegistry.RegisterAssetDirectory(info);
-            } else if (path.EndsWith(AssetManager.AssetDefinitionFileName))
+            }
+            else if (path.EndsWith(AssetManager.AssetDefinitionFileName))
             {
                 AssetInfo info = rootDirectory.Info.GetAssetInfo(string.Join("/", path.Split("/").SkipLast(1)));
                 AssetRegistry.RegisterAsset(info);
@@ -85,7 +81,7 @@ namespace FlemStudio.AssetManagement.Core
                 {
                     AssetRegistry.UnregisterAsset(asset);
                 }
-                
+
             }
             else
             {
@@ -102,6 +98,6 @@ namespace FlemStudio.AssetManagement.Core
             }
         }
 
-        
+
     }
 }

@@ -11,7 +11,7 @@ namespace FlemStudio.AssetManagement.Core
 
         public void Test();
         public void OnCreateAssetDefault(AssetInfo assetInfo);
-        
+
     }
 
 
@@ -28,23 +28,21 @@ namespace FlemStudio.AssetManagement.Core
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
     public class AssetTypeAttribute : ExportAttribute, IAssetTypeIdentity
     {
-        public AssetTypeAttribute(string name, string guid, string version) : base(typeof(IAssetType)) 
+        public AssetTypeAttribute(string name, string guid, string version) : base(typeof(IAssetType))
         {
             Name = name;
             Guid = guid;
             Version = version;
-            Context = "core";
         }
 
         public string Name { get; }
         public string Guid { get; }
         public string Version { get; }
-        public string Context { get; }
 
 
     }
 
 
-    
+
 
 }
